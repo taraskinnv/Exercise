@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BD_local_file" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=USER68;Initial Catalog=BD_local_file;Persist Security Info=True;User ID=sa" SettingsObjectName="Translate.Properties.Settings" SettingsPropertyName="BD_local_fileConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Word" Member="Word">
+    <Type Name="Word">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="word_slovo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="id_loc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Word_Translate" Member="Translate" ThisKey="id" OtherKey="id_translate_word" Type="Translate" />
+      <Association Name="Word_Translate1" Member="Translate1" ThisKey="id" OtherKey="id_word" Type="Translate" />
+      <Association Name="Locate_language_Word" Member="Locate_language" ThisKey="id_loc" OtherKey="id" Type="Locate_language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Locate_language" Member="Locate_language">
+    <Type Name="Locate_language">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="languag" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Locate_language_Word" Member="Word" ThisKey="id" OtherKey="id_loc" Type="Word" />
+      <Association Name="Locate_language_Translate" Member="Translate" ThisKey="id" OtherKey="id_loc" Type="Translate" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Translate" Member="Translate">
+    <Type Name="Translate">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_loc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_word" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_translate_word" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="count_trans" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Locate_language_Translate" Member="Locate_language" ThisKey="id_loc" OtherKey="id" Type="Locate_language" IsForeignKey="true" />
+      <Association Name="Word_Translate" Member="Word" ThisKey="id_translate_word" OtherKey="id" Type="Word" IsForeignKey="true" />
+      <Association Name="Word_Translate1" Member="Word1" ThisKey="id_word" OtherKey="id" Type="Word" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Registration" Member="Registration">
+    <Type Name="Registration">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_processor" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="token" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Word_tr" Method="Word_tr">
+    <Parameter Name="id_word" Type="System.Int32" DbType="Int" />
+    <Parameter Name="lang" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="Word_trResult">
+      <Column Name="word_slovo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Add_count_status" Method="Add_count_status">
+    <Parameter Name="id_proc" Type="System.String" DbType="NVarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Add_count_trans" Method="Add_count_trans">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Add_id_processor" Method="Add_id_processor">
+    <Parameter Name="id_proc" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="token_out" Type="System.String" DbType="NVarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Add_transl" Method="Add_transl">
+    <Parameter Name="lang_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="word_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="transl_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Add_word" Method="Add_word">
+    <Parameter Name="word" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="lang_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Search_id_processor" Method="Search_id_processor">
+    <Parameter Name="id" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="Search_id_processorResult">
+      <Column Name="id_processor" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.search_trans_id" Method="search_trans_id">
+    <Parameter Name="lang_lang" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="id_word" Type="System.Int32" DbType="Int" />
+    <Parameter Name="transl_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="search_trans_idResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Word_s" Method="Word_s">
+    <ElementType Name="Word_sResult">
+      <Column Name="col" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Word_search" Method="Word_search">
+    <Parameter Name="word" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="Word_searchResult">
+      <Column Name="word_slovo" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Word_search_id" Method="Word_search_id">
+    <Parameter Name="word" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="Word_search_idResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.language_id" Method="language_id">
+    <Parameter Name="lang" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="language_idResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Search_status" Method="Search_status">
+    <Parameter Name="id_proc" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="Search_statusResult">
+      <Column Name="status_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>
