@@ -65,30 +65,14 @@ namespace Translate
             //textBox2.Text = GetID();
             if (Status() == 1)
             {
-                //textBox1.Text = ReadOnlyAttribute.
-                //textBox1.ReadOnly = ReadOnlyAttribute.Yes;
-                //textBox3.ReadOnly = true;
+                textBox1.ReadOnly = true;
+                textBox3.ReadOnly = true;
+                label3.Text = label3.Text + " trial version!!!";
+                label4.Text = label4.Text + " trial version!!!";
             }
         }
 
         int number = 0;
-
-        
-
-
-
-        private static string GetID()  //получение ID proc
-        {
-            string str = "";
-            ManagementClass mng = new ManagementClass("win32_processor");
-            ManagementObjectCollection collect = mng.GetInstances();
-            foreach (ManagementObject obj in collect)
-            {
-                str = obj.Properties["processorID"].Value.ToString();
-            }
-                return str;
-        }
-
 
         
         private void Form1_Load(object sender, EventArgs e)
@@ -239,7 +223,7 @@ namespace Translate
         {
             try
             {
-                if (number<1 && Status() == 1)
+                if (number<1 || Status() == 4)
                 {
                     int rowindex = dataGridView1.CurrentCell.RowIndex;
                     int columnindex = dataGridView1.CurrentCell.ColumnIndex;
@@ -258,7 +242,7 @@ namespace Translate
         {
             try
             {
-                if (number < 1 && Status() == 1)
+                if (number < 1 || Status() == 4)
                 {
                     int rowindex = dataGridView1.CurrentCell.RowIndex;
                     int columnindex = dataGridView1.CurrentCell.ColumnIndex;
@@ -393,5 +377,18 @@ namespace Translate
 
 
         }
+
+        private static string GetID()  //получение ID proc
+        {
+            string str = "";
+            ManagementClass mng = new ManagementClass("win32_processor");
+            ManagementObjectCollection collect = mng.GetInstances();
+            foreach (ManagementObject obj in collect)
+            {
+                str = obj.Properties["processorID"].Value.ToString();
+            }
+            return str;
+        }
+
     }
 }
