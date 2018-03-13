@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ICXmlSourceTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SearchLocations />
+  <RssFeeds>
+    <Item DisplayNum="5" Enabled="true" ID="5">
+      <Name xlate="true" UID="501">Being Inventive</Name>
+      <Url xlate="true" UID="504">http://www.autodesk.com/infocenterfeed-being_inventive</Url>
+      <Group xlate="true" UID="503">RSS-каналы</Group>
+      <Description xlate="true" UID="502">Официальный блог поддержки продуктов Autodesk Inventor.</Description>
+    </Item>
+    <Item DisplayNum="5" Enabled="true" ID="1">
+      <Name xlate="true" UID="101">The Gear Box (Коробка передач)</Name>
+      <Url xlate="true" UID="104">http://www.autodesk.com/infocenterfeed-the_gear_box</Url>
+      <Group xlate="true" UID="103">RSS-каналы</Group>
+      <Description xlate="true" UID="102">Блог, связанный с производством.</Description>
+    </Item>
+    <Item DisplayNum="5" Enabled="true" ID="2">
+      <Name xlate="true" UID="201">In the Machine (В сердце машины)</Name>
+      <Url xlate="true" UID="204">http://www.autodesk.com/infocenterfeed-in_the_machine</Url>
+      <Group xlate="true" UID="203">RSS-каналы</Group>
+      <Description xlate="true" UID="202">Блог, связанный с программой Inventor.</Description>
+    </Item>
+    <Item DisplayNum="5" Enabled="true" ID="3">
+      <Name xlate="true" UID="301">Mod the Machine (Модификация системы)</Name>
+      <Url xlate="true" UID="304">http://www.autodesk.com/infocenterfeed-modthemachine</Url>
+      <Group xlate="true" UID="303">RSS-каналы</Group>
+      <Description xlate="true" UID="302">Блог, связанный с программой Inventor.</Description>
+    </Item>
+    <Item DisplayNum="5" Enabled="true" ID="4">
+      <Name xlate="true" UID="401">Engineering Education for Mechanically Inclined (Инженерное образование для любителей механики)</Name>
+      <Url xlate="true" UID="404">http://www.autodesk.com/infocenterfeed-engineeringeducation</Url>
+      <Group xlate="true" UID="403">RSS-каналы</Group>
+      <Description xlate="true" UID="402">Блог, связанный с производством.</Description>
+    </Item>
+  </RssFeeds>
+</ICXmlSourceTree>
