@@ -1,0 +1,24 @@
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\bin\Debug\DZ_potok.exe.config
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\bin\Debug\DZ_potok.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\bin\Debug\DZ_potok.pdb
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.Form1.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.Properties.Resources.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.csproj.GenerateResource.Cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.pdb
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - XML\DZ_potok\bin\Debug\DZ_potok.exe.config
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - XML\DZ_potok\obj\Debug\DZ_potok.exe
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - XML\DZ_potok\obj\Debug\DZ_potok.pdb
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok HTML\DZ_potok\bin\Debug\DZ_potok.exe.config
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.exe
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.pdb
+H:\Projects\DZ_potok HTML\DZ_potok\bin\Debug\DZ_potok.exe.config
+H:\Projects\DZ_potok HTML\DZ_potok\bin\Debug\DZ_potok.exe
+H:\Projects\DZ_potok HTML\DZ_potok\bin\Debug\DZ_potok.pdb
+H:\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.csprojResolveAssemblyReference.cache
+H:\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.Form1.resources
+H:\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.Properties.Resources.resources
+H:\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.csproj.GenerateResource.Cache
+H:\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.exe
+H:\Projects\DZ_potok HTML\DZ_potok\obj\Debug\DZ_potok.pdb
