@@ -1,0 +1,18 @@
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\bin\Debug\DZ_potok.exe.config
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\bin\Debug\DZ_potok.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\bin\Debug\DZ_potok.pdb
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.Form1.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.Properties.Resources.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.csproj.GenerateResource.Cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\DZ_potok\DZ_potok\obj\Debug\DZ_potok.pdb
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\bin\Debug\DZ_potok.exe.config
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\obj\Debug\DZ_potok.exe
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\obj\Debug\DZ_potok.pdb
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\bin\Debug\DZ_potok.exe
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\bin\Debug\DZ_potok.pdb
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\obj\Debug\DZ_potok.csprojResolveAssemblyReference.cache
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\obj\Debug\DZ_potok.Form1.resources
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\obj\Debug\DZ_potok.Properties.Resources.resources
+C:\Users\taraskinnv\Documents\Visual Studio 2015\Projects\DZ_potok - wordpad\DZ_potok\obj\Debug\DZ_potok.csproj.GenerateResource.Cache
