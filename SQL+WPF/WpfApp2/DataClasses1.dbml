@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Taraskin" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=USER68\;Initial Catalog=Taraskin;User ID=sa" SettingsObjectName="WpfApp2.Properties.Settings" SettingsPropertyName="TaraskinConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Picture" Member="Picture">
+    <Type Name="Picture">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="picture" Member="picture1" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
