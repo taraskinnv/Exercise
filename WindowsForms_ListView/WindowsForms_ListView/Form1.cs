@@ -37,37 +37,46 @@ namespace WindowsForms_ListView
             listView1.Columns.Add("Size");
             listView1.Columns.Add("Type");
             listView1.Columns.Add("Izm");
+            //Show(comboBox1.Text);
+        }
 
-            //string[] dirs = Directory.GetDirectories(comboBox1.Text);
-            //// перебор полученных файлов
-            //foreach (string dir in dirs)
-            //{
-            //    ListViewItem lvi = new ListViewItem();
-            //    lvi.Text = dir;
-            //    // добавляем элемент в ListView
-            //    //listView1.Items.Add(lvi);
-            //    lvi.SubItems.Add(lvi.ToString());
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            ComboBox comboBox2 = sender as ComboBox;
+            Show(comboBox2.Text);
+        }
 
-                
-            //}
+        private void Show(string path)
+        {
+            string[] dirs = Directory.GetDirectories(path);
+            // перебор полученных файлов
+            foreach (string dir in dirs)
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(dir);
+                if ((directoryInfo.Attributes == FileAttributes.Directory))
+                {
+                    string[] str = { directoryInfo.Name, "", "dir" };
+                    //ListViewItem lvi = new ListViewItem();
+                    //lvi.Text = dir;
+                    // добавляем элемент в ListView
+                    //listView1.Items.Add(lvi);
+                    //lvi.SubItems.Add(lvi.ToString());
+                    listView1.Items.Add(new ListViewItem(str));
+                }
+            }
 
-
-
-            string[] files = Directory.GetFiles(comboBox1.Text);
+            string[] files = Directory.GetFiles(path);
             // перебор полученных файлов
             foreach (string file in files)
             {
                 FileInfo f = new FileInfo(file);
-
-                string[] str = {f.Name,(f.Length/*/(8*1000)*/).ToString() };
+                string[] str = { f.Name, (f.Length).ToString() };
                 // добавляем элемент в ListView
                 //listView1.Items.Add(lvi);
                 listView1.Items.Add(new ListViewItem(str));
             }
-
             //listView1.Columns.Add(lvi);
         }
-
-
     }
 }
