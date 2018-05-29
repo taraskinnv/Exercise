@@ -71,7 +71,7 @@ namespace WindowsForms_ListView
                 string[] str = { f.Name, (f.Length).ToString(), f.Extension, f.LastWriteTime.ToShortDateString() + " " + f.LastWriteTime.ToShortTimeString() };
                 ListViewItem lvi = new ListViewItem(str);
                 lvi.Tag = f.FullName;
-                listView1.Items.Add(new ListViewItem(str));
+                listView1.Items.Add(lvi);
             }
         }
 
@@ -83,9 +83,40 @@ namespace WindowsForms_ListView
         private void listView1_Click(object sender, EventArgs e)
         {
             ListView v = new ListView();
-                v = (ListView)sender;
-            Show(v.SelectedItems[0].Tag.ToString());
+            v = (ListView)sender;
+            DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
+            if (directory.Attributes == FileAttributes.Directory)
+            {
+                Show(v.SelectedItems[0].Tag.ToString());
+            }
+        }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            ListView v = new ListView();
+            v = (ListView)sender;
+            var str = v.SelectedItems[0].Tag;
             
+            if (e.KeyCode == Keys.Delete)
+            {
+                DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
+                var v1 = directory.Parent;
+                if (directory.Attributes == FileAttributes.Directory)
+                {
+                    Directory.Delete(v.SelectedItems[0].Tag.ToString(), true);
+                }
+                else
+                {
+                    File.Delete(v.SelectedItems[0].Tag.ToString());
+                }
+                Show(v1.FullName);
+            }
+            else if (e.KeyCode == Keys.Back)
+            {
+                DirectoryInfo directory = new DirectoryInfo(str.ToString());
+                var v1 = directory.Parent.Parent;
+                Show(v1.FullName);
+            }
         }
     }
 }
