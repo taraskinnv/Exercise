@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -77,18 +78,27 @@ namespace WindowsForms_ListView
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-
-        }
-
-        private void listView1_Click(object sender, EventArgs e)
-        {
-            ListView v = new ListView();
-            v = (ListView)sender;
+            ListView v = (ListView)sender;
             DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
             if (directory.Attributes == FileAttributes.Directory)
             {
                 Show(v.SelectedItems[0].Tag.ToString());
             }
+            else
+            {
+                Process.Start(v.SelectedItems[0].Tag.ToString());
+            }
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            //ListView v = new ListView();
+            //v = (ListView)sender;
+            //DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
+            //if (directory.Attributes == FileAttributes.Directory)
+            //{
+            //    Show(v.SelectedItems[0].Tag.ToString());
+            //}
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
