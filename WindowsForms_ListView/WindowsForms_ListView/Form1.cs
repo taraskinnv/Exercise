@@ -17,15 +17,12 @@ namespace WindowsForms_ListView
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void FillDriveNodes()
-        {
             
         }
-
+        string path1 = "";
         private void Form1_Load(object sender, EventArgs e)
         {
+
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
                 comboBox1.Items.Add(drive.Name);
@@ -78,6 +75,7 @@ namespace WindowsForms_ListView
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             ListView v = (ListView)sender;
+            path1 = v.SelectedItems[0].Tag.ToString();
             DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
             if (directory.Attributes == FileAttributes.Directory)
             {
@@ -93,14 +91,15 @@ namespace WindowsForms_ListView
         {
             ListView v = new ListView();
             v = (ListView)sender;
-            var z = v.Items.Count;
-            var str = v.Items[0].Tag;
-            //v.Items[0].Index;
-
-            //v.Items[0].Focused = true;
-            //v.SelectedItems[0].Focused = true;
-                //=v.Select();
-            //var str = v.SelectedItems[0].Tag;
+            string str;
+            if (v.Items.Count == 0)
+            {
+                str = path1;
+            }
+            else
+            {
+                str = v.Items[0].Tag.ToString();
+            }
             
             if (e.KeyCode == Keys.Delete)
             {
@@ -118,8 +117,16 @@ namespace WindowsForms_ListView
             }
             else if (e.KeyCode == Keys.Back)
             {
-                DirectoryInfo directory = new DirectoryInfo(str.ToString());
-                var v1 = directory.Parent.Parent;
+                DirectoryInfo directory = new DirectoryInfo(str);
+                var v1 = directory.Parent;
+                if (v.Items.Count == 0)
+                {
+                    v1 = directory.Parent;
+                }
+                else if(directory.Parent.Parent != null)
+                {
+                    v1 = directory.Parent.Parent;
+                }
                 Show(v1.FullName);
             }
         }
