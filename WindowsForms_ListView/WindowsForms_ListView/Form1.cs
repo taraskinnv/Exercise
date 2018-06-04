@@ -17,7 +17,6 @@ namespace WindowsForms_ListView
         public Form1()
         {
             InitializeComponent();
-            //comboBox1.Items.IsReadOnly;
         }
 
         private void FillDriveNodes()
@@ -90,22 +89,18 @@ namespace WindowsForms_ListView
             }
         }
 
-        private void listView1_Click(object sender, EventArgs e)
-        {
-            //ListView v = new ListView();
-            //v = (ListView)sender;
-            //DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
-            //if (directory.Attributes == FileAttributes.Directory)
-            //{
-            //    Show(v.SelectedItems[0].Tag.ToString());
-            //}
-        }
-
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
             ListView v = new ListView();
             v = (ListView)sender;
-            var str = v.SelectedItems[0].Tag;
+            var z = v.Items.Count;
+            var str = v.Items[0].Tag;
+            //v.Items[0].Index;
+
+            //v.Items[0].Focused = true;
+            //v.SelectedItems[0].Focused = true;
+                //=v.Select();
+            //var str = v.SelectedItems[0].Tag;
             
             if (e.KeyCode == Keys.Delete)
             {
