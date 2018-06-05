@@ -19,7 +19,7 @@ namespace WindowsForms_ListView
             InitializeComponent();
             
         }
-        string path1 = "";
+        string path = "";
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -65,7 +65,7 @@ namespace WindowsForms_ListView
             foreach (string file in files)
             {
                 FileInfo f = new FileInfo(file);
-                string[] str = { f.Name, (f.Length).ToString(), f.Extension, f.LastWriteTime.ToShortDateString() + " " + f.LastWriteTime.ToShortTimeString() };
+                string[] str = { f.Name+f.Extension, (f.Length).ToString(), f.Extension, f.LastWriteTime.ToShortDateString() + " " + f.LastWriteTime.ToShortTimeString() };
                 ListViewItem lvi = new ListViewItem(str);
                 lvi.Tag = f.FullName;
                 listView1.Items.Add(lvi);
@@ -75,7 +75,7 @@ namespace WindowsForms_ListView
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             ListView v = (ListView)sender;
-            path1 = v.SelectedItems[0].Tag.ToString();
+            path = v.SelectedItems[0].Tag.ToString();
             DirectoryInfo directory = new DirectoryInfo(v.SelectedItems[0].Tag.ToString());
             if (directory.Attributes == FileAttributes.Directory)
             {
@@ -87,14 +87,14 @@ namespace WindowsForms_ListView
             }
         }
 
-        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        private void listView1_KeyDown(object sender, KeyEventArgs e)       
         {
             ListView v = new ListView();
             v = (ListView)sender;
             string str;
             if (v.Items.Count == 0)
             {
-                str = path1;
+                str = path;
             }
             else
             {
@@ -128,6 +128,20 @@ namespace WindowsForms_ListView
                     v1 = directory.Parent.Parent;
                 }
                 Show(v1.FullName);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)      //rename
+        {
+            DirectoryInfo directory = new DirectoryInfo(listView1.SelectedItems[0].Tag.ToString());
+            if (directory.Attributes == FileAttributes.Directory)
+            {
+                directory.MoveTo(directory.Parent.Name + textBox1.Text);
+            }
+            else
+            {
+                FileInfo file = new FileInfo(listView1.SelectedItems[0].Tag.ToString());
+                file.MoveTo(file.DirectoryName + textBox1.Text + file.Extension);
             }
         }
     }
