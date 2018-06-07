@@ -1,0 +1,18 @@
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\bin\Debug\2_picture.exe.config
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\bin\Debug\2_picture.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\bin\Debug\2_picture.pdb
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\obj\Debug\2_picture.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\obj\Debug\_2_picture.Form1.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\obj\Debug\_2_picture.Properties.Resources.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\obj\Debug\2_picture.csproj.GenerateResource.Cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\obj\Debug\2_picture.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\2_picture\2_picture\obj\Debug\2_picture.pdb
+F:\2_picture\2_picture\bin\Debug\2_picture.exe.config
+F:\2_picture\2_picture\bin\Debug\2_picture.exe
+F:\2_picture\2_picture\bin\Debug\2_picture.pdb
+F:\2_picture\2_picture\obj\Debug\2_picture.csprojResolveAssemblyReference.cache
+F:\2_picture\2_picture\obj\Debug\_2_picture.Form1.resources
+F:\2_picture\2_picture\obj\Debug\_2_picture.Properties.Resources.resources
+F:\2_picture\2_picture\obj\Debug\2_picture.csproj.GenerateResource.Cache
+F:\2_picture\2_picture\obj\Debug\2_picture.exe
+F:\2_picture\2_picture\obj\Debug\2_picture.pdb
