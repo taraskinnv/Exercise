@@ -1,0 +1,18 @@
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\bin\Debug\WindowsForms_TreeView.exe.config
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\bin\Debug\WindowsForms_TreeView.exe
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\bin\Debug\WindowsForms_TreeView.pdb
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.Form1.resources
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.Properties.Resources.resources
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.csproj.GenerateResource.Cache
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.exe
+c:\users\taraskinnv\documents\visual studio 2017\Projects\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.pdb
+F:\WindowsForms_TreeView\WindowsForms_TreeView\bin\Debug\WindowsForms_TreeView.exe.config
+F:\WindowsForms_TreeView\WindowsForms_TreeView\bin\Debug\WindowsForms_TreeView.exe
+F:\WindowsForms_TreeView\WindowsForms_TreeView\bin\Debug\WindowsForms_TreeView.pdb
+F:\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.csprojResolveAssemblyReference.cache
+F:\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.Form1.resources
+F:\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.Properties.Resources.resources
+F:\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.csproj.GenerateResource.Cache
+F:\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.exe
+F:\WindowsForms_TreeView\WindowsForms_TreeView\obj\Debug\WindowsForms_TreeView.pdb
