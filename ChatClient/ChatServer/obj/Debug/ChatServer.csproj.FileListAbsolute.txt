@@ -1,0 +1,7 @@
+C:\Users\fateev\source\repos\ChatClient\ChatServer\bin\Debug\ChatServer.exe.config
+C:\Users\fateev\source\repos\ChatClient\ChatServer\bin\Debug\ChatServer.exe
+C:\Users\fateev\source\repos\ChatClient\ChatServer\bin\Debug\ChatServer.pdb
+C:\Users\fateev\source\repos\ChatClient\ChatServer\obj\Debug\ChatServer.csprojResolveAssemblyReference.cache
+C:\Users\fateev\source\repos\ChatClient\ChatServer\obj\Debug\ChatServer.csproj.CoreCompileInputs.cache
+C:\Users\fateev\source\repos\ChatClient\ChatServer\obj\Debug\ChatServer.exe
+C:\Users\fateev\source\repos\ChatClient\ChatServer\obj\Debug\ChatServer.pdb
