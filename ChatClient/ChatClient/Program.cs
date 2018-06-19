@@ -12,16 +12,16 @@ namespace ChatClient
         private const int port = 2222;
         static TcpClient client;
         static NetworkStream stream;
-        static ConsoleColor q;
-        static ConsoleColor q1;
+        static ConsoleColor name;
+        static ConsoleColor message_color;
         enum Color1 { Black, Red }
         static void Main(string[] args)
         {
             Console.WriteLine("Введите имя");
             userName = Console.ReadLine();
             client = new TcpClient();
-             q = Color();
-            q1 = Color();
+            name = Color();
+            message_color = Color();
             try
             {
                 client.Connect(host, port);
@@ -62,7 +62,7 @@ namespace ChatClient
             Console.WriteLine("Введите сообщение");
             while (true)
             {
-                Console.ForegroundColor = q;
+                Console.ForegroundColor = name;
                 string message = Console.ReadLine();
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 stream.Write(data, 0, data.Length);
@@ -86,8 +86,11 @@ namespace ChatClient
                     } while (stream.DataAvailable);
 
                     string message = builder.ToString();
-                    Console.ForegroundColor = q1;
-                    Console.WriteLine(message);
+                    int i = message.IndexOf(':');
+                    Console.ForegroundColor = name;
+                    Console.Write(message.Substring(0,i));
+                    Console.ForegroundColor = message_color;
+                    Console.WriteLine(message.Substring(i+1,message.Length));
                 }
                 catch (Exception ex)
                 {
