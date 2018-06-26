@@ -1,0 +1,10 @@
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\bin\Debug\WindowsFormsApp_ObmenValyt.exe.config
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\bin\Debug\WindowsFormsApp_ObmenValyt.exe
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\bin\Debug\WindowsFormsApp_ObmenValyt.pdb
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.csprojResolveAssemblyReference.cache
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.Form1.resources
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.Properties.Resources.resources
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.csproj.GenerateResource.Cache
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.csproj.CoreCompileInputs.cache
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.exe
+C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.pdb
