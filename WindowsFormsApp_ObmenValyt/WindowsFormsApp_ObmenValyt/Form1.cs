@@ -14,19 +14,53 @@ namespace WindowsFormsApp_ObmenValyt
 {
     public partial class Form1 : Form
     {
-        string[] valyt;
+        
         public Form1()
         {
             InitializeComponent();
-            valyt = GetV();
-            //double[] znach = USD_UAH();
-            double[] znach = UAH("RUR");
-            //int d = RUR_UAH()[0];
-            //string[] wer = RUR_UAH();
+            Params();
+        }
+
+        private void Params()       // начальные параметры
+        {
+            comboBox1.SelectedIndex = 0;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.SelectedIndex = 1;
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            textBox2.ReadOnly = true;
         }
         
+        private void Сonverting() // func conversion
+        {
+            if (comboBox1.SelectedItem!=comboBox2.SelectedItem)
+            {
+                if (comboBox1.Text != "UAH")
+                {
+                    double[] d1 = UAH(comboBox1.Text);
+                    if (comboBox2.Text == "UAH")
+                    {
 
-        private string PB()     //получение строки с валютами
+                        textBox2.Text = (Double.Parse(textBox1.Text) * d1[0]).ToString();
+                    }
+                    else
+                    {
+                        double[] d = UAH(comboBox2.Text);
+                        textBox2.Text = ((Double.Parse(textBox1.Text) * d1[0]) / d[1]).ToString();
+                    }
+                }
+                else
+                {
+                    double[] d = UAH(comboBox2.Text);
+                    textBox2.Text = (Double.Parse(textBox1.Text) / d[1]).ToString();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите разные валюты!!!");
+            }
+        }
+
+        private string PB()     //получение строки с валютами JSON
         {
             string str = "";
             try
@@ -51,22 +85,15 @@ namespace WindowsFormsApp_ObmenValyt
             return str;
         }
 
-        private string[] GetV()
+        private string[] GetV()     // разбитие на строки 
         {
             string[] stringSeparators = new string[] { "}," };
             return PB().Split(stringSeparators, StringSplitOptions.None);
         }
 
-        private double[] USD_UAH()
+        private double[] UAH(string Valut)      //получение buy sale валюты
         {
-            double[] znach = new double[2];
-            znach[0] = ConvetrToDouble(valyt[0].Substring(valyt[0].IndexOf("\"buy\":\"") + "\"buy\":\"".Length, 8));
-            znach[1] = ConvetrToDouble(valyt[0].Substring(valyt[0].IndexOf("\"sale\":\"") + "\"sale\":\"".Length, 8));
-            return znach;
-        }
-
-        private double[] UAH(string Valut)
-        {
+            string[] valyt = GetV();
             int i = -1;
             switch (Valut)
             {
@@ -86,35 +113,17 @@ namespace WindowsFormsApp_ObmenValyt
             return znach;
         }
 
-        private double[] EUR_UAH()
-        {
-            double[] znach = new double[2];
-            znach[0] = ConvetrToDouble(valyt[1].Substring(valyt[1].IndexOf("\"buy\":\"") + "\"buy\":\"".Length, 8));
-            znach[1] = ConvetrToDouble(valyt[1].Substring(valyt[1].IndexOf("\"sale\":\"") + "\"sale\":\"".Length, 8));
-            return znach;
-        }
-
-        private double[] RUR_UAH()
-        {
-            double[] znach = new double[2];
-            znach[0] = ConvetrToDouble(valyt[2].Substring(valyt[2].IndexOf("\"buy\":\"") + "\"buy\":\"".Length, 8));
-            znach[1] = ConvetrToDouble(valyt[2].Substring(valyt[2].IndexOf("\"sale\":\"") + "\"sale\":\"".Length, 8));
-            return znach;
-        }
-
-        //private double[] USD_UAH()
-        //{
-        //    double[] znach = new double[2];
-        //    znach[0] = ConvetrToDouble(valyt[0].Substring(valyt[0].IndexOf("\"buy\":\"") + "\"buy\":\"".Length, 8));
-        //    znach[1] = ConvetrToDouble(valyt[0].Substring(valyt[0].IndexOf("\"sale\":\"") + "\"sale\":\"".Length, 8));
-        //    return znach;
-        //}
-
-        private double ConvetrToDouble(string number)
+        
+        private double ConvetrToDouble(string number)   //своя конвертация в ToDouble
         {
             string[] s = number.Split('.');
             string sd = s[0] +','+ s[1];
             return Double.Parse(sd);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Сonverting();
         }
     }
 }
