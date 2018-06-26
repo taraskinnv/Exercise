@@ -14,12 +14,21 @@ namespace WindowsFormsApp_ObmenValyt
 {
     public partial class Form1 : Form
     {
-        
+        Form2 f2;
         public Form1()
         {
-            InitializeComponent();
-            Params();
+            f2 = new Form2(this);
+            if (f2.ShowDialog() == DialogResult.OK)
+            {
+                this.Visible = false;
+                InitializeComponent();
+                Params();
+            }
+           
+           
+
         }
+        
 
         private void Params()       // начальные параметры
         {
@@ -124,6 +133,12 @@ namespace WindowsFormsApp_ObmenValyt
         private void button1_Click(object sender, EventArgs e)
         {
             Сonverting();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            f2.Visible = true;
         }
     }
 }
