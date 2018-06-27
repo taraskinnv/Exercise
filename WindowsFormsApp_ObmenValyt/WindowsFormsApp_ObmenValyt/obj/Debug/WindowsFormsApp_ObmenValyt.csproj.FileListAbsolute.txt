@@ -8,5 +8,3 @@ C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenV
 C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.csproj.CoreCompileInputs.cache
 C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.exe
 C:\Users\Коля\source\repos\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\obj\Debug\WindowsFormsApp_ObmenValyt.pdb
-C:\Users\taraskinnv\Documents\home_work\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\bin\Debug\WindowsFormsApp_ObmenValyt.exe
-C:\Users\taraskinnv\Documents\home_work\WindowsFormsApp_ObmenValyt\WindowsFormsApp_ObmenValyt\bin\Debug\WindowsFormsApp_ObmenValyt.pdb

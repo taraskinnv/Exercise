@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,16 +18,13 @@ namespace WindowsFormsApp_ObmenValyt
         Form2 f2;
         public Form1()
         {
+            InitializeComponent();
+            Params();
             f2 = new Form2(this);
             if (f2.ShowDialog() == DialogResult.OK)
             {
                 this.Visible = false;
-                InitializeComponent();
-                Params();
             }
-           
-           
-
         }
         
 
@@ -37,36 +35,6 @@ namespace WindowsFormsApp_ObmenValyt
             comboBox2.SelectedIndex = 1;
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             textBox2.ReadOnly = true;
-        }
-        
-        private void Сonverting() // func conversion
-        {
-            if (comboBox1.SelectedItem!=comboBox2.SelectedItem)
-            {
-                if (comboBox1.Text != "UAH")
-                {
-                    double[] d1 = UAH(comboBox1.Text);
-                    if (comboBox2.Text == "UAH")
-                    {
-
-                        textBox2.Text = (Double.Parse(textBox1.Text) * d1[0]).ToString();
-                    }
-                    else
-                    {
-                        double[] d = UAH(comboBox2.Text);
-                        textBox2.Text = ((Double.Parse(textBox1.Text) * d1[0]) / d[1]).ToString();
-                    }
-                }
-                else
-                {
-                    double[] d = UAH(comboBox2.Text);
-                    textBox2.Text = (Double.Parse(textBox1.Text) / d[1]).ToString();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Введите разные валюты!!!");
-            }
         }
 
         private string PB()     //получение строки с валютами JSON
@@ -132,7 +100,60 @@ namespace WindowsFormsApp_ObmenValyt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Сonverting();
+            Log();
+            Email();
+        }
+
+        private void Log()
+        {
+            string currDir = Environment.CurrentDirectory.ToString() +"\\"+ "Log.txt";
+            FileInfo f = new FileInfo(currDir);
+            string textFromFile = "";
+            if (f.Exists)
+            {
+                using (FileStream fstream = File.OpenRead(currDir))
+                {
+                    // преобразуем строку в байты
+                    byte[] array = new byte[fstream.Length];
+                    // считываем данные
+                    fstream.Read(array, 0, array.Length);
+                    // декодируем байты в строку
+                    textFromFile = Encoding.Default.GetString(array);
+                }
+            }
+            textFromFile += DateTime.Now.ToString() + " : " + comboBox1.Text + " " + comboBox2.Text + " " + textBox1.Text + " " + textBox2.Text + "\n";
+            //// запись в файл
+            using (FileStream fstream = new FileStream(currDir, FileMode.OpenOrCreate))
+            {
+                // преобразуем строку в байты
+                byte[] array = Encoding.Default.GetBytes(textFromFile);
+                // запись массива байтов в файл
+
+                fstream.Write(array, 0, array.Length);
+            }
+        }
+
+        private void Email()
+        {
+            // отправитель - устанавливаем адрес и отображаемое в письме имя
+            MailAddress from = new MailAddress("qwerty@gmail.com", "Tom");
+            // кому отправляем
+            MailAddress to = new MailAddress(label5.Text);
+            // создаем объект сообщения
+            MailMessage m = new MailMessage(from, to);
+            // тема письма
+            m.Subject = "Обмен валют";
+            // текст письма
+            m.Body = "Oперация по конвертации прошла успешно "+DateTime.Now.ToString() + " : " + comboBox1.Text + " " + comboBox2.Text + " " + textBox1.Text + " " + textBox2.Text;
+            // письмо представляет код html
+            m.IsBodyHtml = false;
+            // адрес smtp-сервера и порт, с которого будем отправлять письмо
+            SmtpClient smtp = new SmtpClient("aspmx.l.google.com", 25);
+
+            // логин и пароль
+            smtp.Credentials = new NetworkCredential("Login", "password");
+            smtp.EnableSsl = false;
+            smtp.Send(m);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -140,5 +161,50 @@ namespace WindowsFormsApp_ObmenValyt
             this.Visible = false;
             f2.Visible = true;
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            TextBox t = sender as TextBox;
+            try
+            {
+                if (t.Text !="" || comboBox1.SelectedItem != comboBox2.SelectedItem)
+                {
+                    if (comboBox1.SelectedItem != comboBox2.SelectedItem)
+                    {
+                        if (comboBox1.Text != "UAH")
+                        {
+                            double[] d1 = UAH(comboBox1.Text);
+                            if (comboBox2.Text == "UAH")
+                            {
+                                textBox2.Text = (Double.Parse(t.Text) * d1[0]).ToString();
+                            }
+                            else
+                            {
+                                double[] d = UAH(comboBox2.Text);
+                                textBox2.Text = ((Double.Parse(t.Text) * d1[0]) / d[1]).ToString();
+                            }
+                        }
+                        else
+                        {
+                            double[] d = UAH(comboBox2.Text);
+                            textBox2.Text = (Double.Parse(t.Text) / d[1]).ToString();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Введите разные валюты!!!");
+                    }
+                }
+                else
+                {
+                    textBox2.Text = "";
+                }
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex) { }
+            }
     }
 }
