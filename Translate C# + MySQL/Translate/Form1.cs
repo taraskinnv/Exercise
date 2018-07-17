@@ -19,7 +19,7 @@ namespace Translate
 {
     public partial class Form1 : Form
     {
-        MySqlConnection context = new MySqlConnection("Database=bd_local_file; Datasource=localhost; User=root ;Password=ghbvf");
+        MySqlConnection context = new MySqlConnection("Database=bd_local_file;Datasource=localhost;User=root;Password=ghbvf");
 
         //DataClasses1DataContext context;
         Ping pin = new Ping();
@@ -27,6 +27,7 @@ namespace Translate
         {
             InitializeComponent();
             context.Open();
+            
 
             //--------------------------------------------------------------------------
             // Проверка наличия интернета
@@ -93,12 +94,15 @@ namespace Translate
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            //var loc = context.Locate_language;
-            //foreach (var i in loc)
-            //{
-            //    comboBox1.Items.Add(i.languag);
-            //    comboBox2.Items.Add(i.languag);
-            //}
+
+         
+            foreach (var i in local().Split())
+            {
+                comboBox1.Items.Add(i);
+                comboBox2.Items.Add(i);
+            }
+
+
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 1;
         }
@@ -391,6 +395,20 @@ namespace Translate
                 str = obj.Properties["processorID"].Value.ToString();
             }
             return str;
+        }
+
+        private string local()
+        {
+
+            MySqlCommand command = context.CreateCommand();
+            command.CommandText = "select locate_language.languag from locate_language;";
+            var reader = command.ExecuteReader();
+            string str = "";
+            while (reader.Read())
+            {
+                str += reader.GetString(0) + " ";
+            }
+            return str.Trim();
         }
 
     }
