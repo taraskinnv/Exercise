@@ -162,5 +162,20 @@ namespace On_Off_NetAdapter
                 button1.Enabled = z;
                 button2.Enabled = z;
         }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            comboBox1.Enabled = false;
+            comboBox1.Items.Clear();
+            GetNetworkAdapter();
+            comboBox1.Enabled = true;
+        }
+
+        private void comboBox2_Click(object sender, EventArgs e)
+        {
+
+            comboBox2.Items.Clear();
+            GetNetworkAdapter();
+        }
     }
 }

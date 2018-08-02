@@ -64,6 +64,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(260, 21);
             this.comboBox1.TabIndex = 2;
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // comboBox2
             // 
@@ -72,6 +73,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(260, 21);
             this.comboBox2.TabIndex = 3;
+            this.comboBox2.Click += new System.EventHandler(this.comboBox2_Click);
             // 
             // notifyIcon1
             // 
