@@ -37,6 +37,8 @@ namespace MyPaintWinForm
                     EndX = endX;
                     EndY = endY;
                     myElenent = el;
+                    solidBrush = solid;
+                    ColorBackGround = colorBackGround;
                     break;
                 case MyElenent.line:
                     MyPen = pen;

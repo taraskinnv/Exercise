@@ -43,34 +43,37 @@ namespace MyPaintWinForm
             btn_back_color.BackColor = pictureBox1.BackColor;
             textBox2.Text = "6";
             pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
+            checkBox1.CheckState = CheckState.Checked;
         }
        
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            startPaint = true;
-            flag = false;
-            initX = e.X;
-            initY = e.Y;
-            //if (e.Button == MouseButtons.Left && drawCircle)
-            //{
+            if (e.Button == MouseButtons.Left)// && drawCircle)
+            {
+                startPaint = true;
+                flag = false;
+                initX = e.X;
+                initY = e.Y;
+                //
                 //Запоминаем центр
                 _center = new Point(e.X, e.Y);
                 //Назначаем нужный метод рисования.
                 //pictureBox1.Paint -= PictureBox1_Paint;
                 pictureBox1.Paint += OnMovePictureBox_Paint;
-            //}
+            }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            startPaint = false;
-            endX = e.X;
-            endY = e.Y;
-            flag = true;
-            //_endPoint = new Point(e.X, e.Y);//
-            //if (e.Button == MouseButtons.Left && drawCircle)//
-            //{//
+            if (e.Button == MouseButtons.Left) //&& drawCircle)//
+            {//
+                startPaint = false;
+                endX = e.X;
+                endY = e.Y;
+                flag = true;
+                //_endPoint = new Point(e.X, e.Y);//
+                //
                 //Запоминаем конечную точку радиуса
                 _endPoint = new Point(e.X, e.Y);
                 //Переназначаем методы рисования
@@ -78,7 +81,7 @@ namespace MyPaintWinForm
                 //pictureBox1.Paint += PictureBox1_Paint;
                 //Обновляем
                 pictureBox1.Invalidate();
-            //}//
+            }
         }
         int radius;
         private void OnMovePictureBox_Paint(object sender, PaintEventArgs e)
@@ -94,15 +97,13 @@ namespace MyPaintWinForm
             //Рисование окружности
             if (drawCircle)
             {
-                SolidBrush sb = new SolidBrush(Color.Brown);
-                g.FillEllipse(Brushes.Coral, -radius, -radius, radius * 2, radius * 2);
-                e.Graphics.DrawEllipse(pen, -radius, -radius, radius * 2, radius * 2);
+                g.FillEllipse(new SolidBrush(btn_color.BackColor), -radius, -radius, radius * 2, radius * 2);
+                e.Graphics.DrawEllipse(pen,  -radius, -radius, radius * 2, radius * 2);
             }
             if (drawPoint)
             {
-                SolidBrush sb = new SolidBrush(Color.Brown);
-                g.FillEllipse(Brushes.Coral, -radius, -radius, radius * 2, radius * 2);
-                e.Graphics.DrawEllipse(pen, -radius, -radius, radius * 2, radius * 2);
+                g.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text)/2, -float.Parse(textBox2.Text)/2, float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
+                //e.Graphics.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text), -float.Parse(textBox2.Text), float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
             }
         }
 
@@ -110,15 +111,18 @@ namespace MyPaintWinForm
         {
             if (startPaint && drawPoint )
             {
-                datalist dp = new datalist(datalist.MyElenent.point, pen, initX, initY, e.X, e.Y);
+                g.TranslateTransform(_center.X, _center.Y);
+                //datalist dp = new datalist(datalist.MyElenent.point, pen, initX, initY, e.X, e.Y,false,true);
                 //g.DrawLine(pen, initX, initY, e.X, e.Y);
-
-
+                float radius = float.Parse(textBox2.Text)/2;
+                g.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text), -float.Parse(textBox2.Text), float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
+                datalist dp = new datalist(datalist.MyElenent.point, pen, initX - radius, initY - radius, radius * 2, radius * 2, false, background, new SolidBrush(btn_color.BackColor));
                 list.Add(dp);
                 initX = e.X;
                 initY = e.Y;
                 textBox1.Text = list.Count.ToString();
-                
+                pictureBox1.Invalidate();
+
             }
             else if (drawline && startPaint || drawline)
             {
@@ -209,7 +213,7 @@ namespace MyPaintWinForm
             {
                 if (list[i].myElenent== datalist.MyElenent.point)
                 {
-                    e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    e.Graphics.FillEllipse(list[i].MyPen.Brush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                 }
                 else if (list[i].myElenent == datalist.MyElenent.line)
                 {
@@ -320,7 +324,7 @@ namespace MyPaintWinForm
 
         private void checkBox1_CheckStateChanged(object sender, EventArgs e)
         {
-            if (btn_back_color.BackColor == pictureBox1.BackColor)
+            if (btn_color.BackColor == pictureBox1.BackColor)
             {
                 checkBox1.CheckState = CheckState.Unchecked;
                 MessageBox.Show("измените цвет фона");
