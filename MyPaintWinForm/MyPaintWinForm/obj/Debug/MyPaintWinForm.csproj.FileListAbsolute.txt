@@ -1,0 +1,38 @@
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe.config
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.pdb
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Form1.resources
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Properties.Resources.resources
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.GenerateResource.Cache
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.exe
+c:\users\taraskinnv\documents\visual studio 2017\Projects\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.pdb
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe.config
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.exe
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.pdb
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csprojResolveAssemblyReference.cache
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Form1.resources
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Properties.Resources.resources
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.GenerateResource.Cache
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.pdb
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe.config
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.pdb
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csprojResolveAssemblyReference.cache
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Form1.resources
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Properties.Resources.resources
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.GenerateResource.Cache
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.exe
+C:\Users\taraskinnv\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.pdb
+C:\Users\Коля\Desktop\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.CoreCompileInputs.cache
+F:\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe.config
+F:\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe
+F:\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.pdb
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csprojResolveAssemblyReference.cache
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Form1.resources
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.Properties.Resources.resources
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.GenerateResource.Cache
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.CoreCompileInputs.cache
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.exe
+F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.pdb
