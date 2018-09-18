@@ -16,6 +16,8 @@ namespace MyPaintWinForm
         Point MouseLoc = new Point(0, 0);
         Point Start;
         Point Finish;
+        Point Start1;
+        Point Finish1= new Point(0, 0);
         int initX;
         int initY;
         int endX;
@@ -94,6 +96,7 @@ namespace MyPaintWinForm
             if (e.Button == MouseButtons.Left && drawRectangle)
             {
                 Start = new Point(e.X, e.Y);
+                Start1 = new Point(e.X, e.Y);
                 startPaint = true;
                 flag = false;
                 initX = e.X;
@@ -129,7 +132,7 @@ namespace MyPaintWinForm
         private void OnMovePictureBox_Paint(object sender, PaintEventArgs e)
         {
             //Перенос начала координат в указанный центр
-            e.Graphics.TranslateTransform(_center.X, _center.Y);
+            //e.Graphics.TranslateTransform(_center.X, _center.Y);
             //Вычисляем радиус по теореме Пифагора
             float radius;//
             if (drawPoint)
@@ -158,8 +161,21 @@ namespace MyPaintWinForm
             }
             if (drawRectangle)
             {
-                g.FillRectangle(new SolidBrush(btn_color.BackColor), -radius, -radius, radius * 2, radius * 2);
-                e.Graphics.DrawRectangle(pen, -radius, -radius, radius * 2, radius * 2);
+                if (Start.X > Finish1.X)
+                {
+                    int a = Start.X;
+                    Start1.X = Finish1.X;
+                    Finish1.X = a;
+
+                }
+                if (Start.Y > Finish1.Y)
+                {
+                    int a = Start.Y;
+                    Start1.Y = Finish1.Y;
+                    Finish1.Y = a;
+                }
+                //e.Graphics.FillRectangle(new SolidBrush(btn_color.BackColor), Start1.X, Start1.Y, Finish1.X - Start1.X, Finish1.Y - Start1.Y);
+                e.Graphics.DrawRectangle(pen, Start1.X, Start1.Y, Finish1.X - Start1.X, Finish1.Y - Start1.Y);
             }
         }
 
@@ -228,6 +244,7 @@ namespace MyPaintWinForm
             }
             if (drawRectangle && startPaint || drawRectangle)
             {
+                Finish1 = e.Location;
                 ////pictureBox1.Invalidate();
                 ////if (!flag)
                 ////{
@@ -273,23 +290,21 @@ namespace MyPaintWinForm
                     {
                         b = false;
                     }
-                    //radius = (int)Math.Sqrt(Math.Pow(_endPoint.X - _center.X, 2) + Math.Pow(_endPoint.Y - _center.Y, 2));
-                    //g.TranslateTransform(_center.X, _center.Y);
-                    if (Start.X<Finish.X)
+
+                    if (Start.X>Finish.X)
                     {
                         int a = Start.X;
                         Start.X = Finish.X;
                         Finish.X = a;
 
                     }
-                    if (Start.Y < Finish.Y)
+                    if (Start.Y > Finish.Y)
                     {
                         int a = Start.Y;
                         Start.Y = Finish.Y;
                         Finish.Y = a;
-
                     }
-                    datalist dr = new datalist(datalist.MyElenent.rectangle, pen, Start.X, Start.Y, Finish.X, Finish.Y, b, background, new SolidBrush(btn_back_color.BackColor));
+                    datalist dr = new datalist(datalist.MyElenent.rectangle, pen, Start.X, Start.Y, Finish.X - Start.X, Finish.Y - Start.Y, b, background, new SolidBrush(btn_back_color.BackColor));
                     list.Add(dr);
                     flag = false;
                 }
