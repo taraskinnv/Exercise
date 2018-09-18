@@ -54,7 +54,6 @@ namespace MyPaintWinForm
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-
             if (e.Button == MouseButtons.Left && drawCircle)
             {
                 startPaint = true;
@@ -68,30 +67,24 @@ namespace MyPaintWinForm
                 //pictureBox1.Paint -= PictureBox1_Paint;
                 pictureBox1.Paint += OnMovePictureBox_Paint;
             }
+            if (e.Button == MouseButtons.Left && drawline)
+            {
+                Start = new Point(e.X, e.Y);
+                startPaint = true;
+                flag = false;
+                initX = e.X;
+                initY = e.Y;
+                pictureBox1.Paint += OnMovePictureBox_Paint;
+            }
             if (e.Button == MouseButtons.Left && drawPoint)
             {
                 startPaint = true;
                 flag = false;
                 initX = e.X;
                 initY = e.Y;
-                //
-                //Запоминаем центр
-                //_center = new Point(e.X, e.Y);
-                _center = new Point(0, 0);
-                //Назначаем нужный метод рисования.
-                //pictureBox1.Paint -= PictureBox1_Paint;
-                //pictureBox1.Paint += OnMovePictureBox_Paint;
-                ////g.TranslateTransform(_center.X, _center.Y);
-                //////datalist dp = new datalist(datalist.MyElenent.point, pen, initX, initY, e.X, e.Y,false,true);
-                //////g.DrawLine(pen, initX, initY, e.X, e.Y);
-                ////float radius = float.Parse(textBox2.Text) / 2;
-                ////g.FillEllipse(new SolidBrush(btn_color.BackColor), _center.X - radius, _center.Y - radius, radius * 2, radius * 2);
-                //////g.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text), -float.Parse(textBox2.Text), float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
-                ////datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, false, background, new SolidBrush(btn_color.BackColor));
-                ////list.Add(dp);
-                ////textBox1.Text = list.Count.ToString();
 
-                ////pictureBox1.Invalidate();
+                _center = new Point(0, 0);
+
             }
             if (e.Button == MouseButtons.Left && drawRectangle)
             {
@@ -137,27 +130,26 @@ namespace MyPaintWinForm
             float radius;//
             if (drawPoint)
             {
-                //radius = (float)Math.Sqrt(Math.Pow(float.Parse(textBox2.Text) - _center.X, 2) + Math.Pow(float.Parse(textBox2.Text) - _center.Y, 2));
                 radius = float.Parse(textBox2.Text)/2;
             }
             else
             {
                 radius = (float)Math.Sqrt(Math.Pow(_endPoint.X - _center.X, 2) + Math.Pow(_endPoint.Y - _center.Y, 2));
             }
-            //Используем пунктирное перо красного цвета
-            //using (Pen pen = new Pen(Color.Red, 1.5f))
-            //{
-            //Рисование окружности
+            if (drawline)
+            {
+                e.Graphics.DrawLine(pen, Start, Finish1);
+            }
             if (drawCircle)
             {
+                e.Graphics.TranslateTransform(_center.X, _center.Y);
                 g.FillEllipse(new SolidBrush(btn_color.BackColor), -radius, -radius, radius * 2, radius * 2);
                 e.Graphics.DrawEllipse(pen,  -radius, -radius, radius * 2, radius * 2);
             }
             if (drawPoint)
             {
+                e.Graphics.TranslateTransform(_center.X, _center.Y);
                 g.FillEllipse(new SolidBrush(btn_color.BackColor),_center.X -radius, _center.Y- radius, radius * 2, radius * 2);
-                //g.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text)/2, -float.Parse(textBox2.Text)/2, float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
-                //e.Graphics.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text), -float.Parse(textBox2.Text), float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
             }
             if (drawRectangle)
             {
@@ -195,47 +187,54 @@ namespace MyPaintWinForm
                 //g.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text), -float.Parse(textBox2.Text), float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
                 datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, false, background, new SolidBrush(btn_color.BackColor));
                 list.Add(dp);
-                _center.X = e.X;
-                _center.Y = e.Y;
                 textBox1.Text = list.Count.ToString();
                 pictureBox1.Invalidate();
 
+                ////--------------------------------------------------------
+                //if (e.Button == MouseButtons.Left)
+                //{
+                //    //Запоминаем конечную точку радиуса
+                //    Finish1 = e.Location;
+                //    //Обновляем PictureBox, чтобы вызывать его перерисовку
+                //    pictureBox1.Invalidate();
+                //}
+
+                //if (!flag)
+                //{
+                //    _center = e.Location;
+                //    g.TranslateTransform(_center.X, _center.Y);
+                //    //datalist dp = new datalist(datalist.MyElenent.point, pen, initX, initY, e.X, e.Y,false,true);
+                //    //g.DrawLine(pen, initX, initY, e.X, e.Y);
+                //    radius = float.Parse(textBox2.Text) / 2;
+                //    g.FillEllipse(new SolidBrush(btn_color.BackColor), _center.X - radius, _center.Y - radius, radius * 2, radius * 2);
+
+
+                //    dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, false, background, new SolidBrush(btn_color.BackColor));
+                //    list.Add(dp);
+                //    textBox1.Text = list.Count.ToString();
+                //    pictureBox1.Invalidate();
+                //}
+                //textBox1.Text = list.Count.ToString();
+                ////----------------------------------------------
             }
-
-            ////////////////////////////////////// другой вариант
-            //MouseLoc = e.Location;
-            //if (e.Button == MouseButtons.Left && drawPoint && startPaint)
-            //{
-            //    if (_center != e.Location)
-            //    {
-            //        _center = e.Location;
-            //        g.TranslateTransform(e.X, _center.Y);
-            //        //datalist dp = new datalist(datalist.MyElenent.point, pen, initX, initY, e.X, e.Y,false,true);
-            //        //g.DrawLine(pen, initX, initY, e.X, e.Y);
-            //        float radius = float.Parse(textBox2.Text) / 2;
-            //        g.FillEllipse(new SolidBrush(btn_color.BackColor), _center.X - radius, _center.Y - radius, radius * 2, radius * 2);
-            //        //g.FillEllipse(new SolidBrush(btn_color.BackColor), -float.Parse(textBox2.Text), -float.Parse(textBox2.Text), float.Parse(textBox2.Text) * 2, float.Parse(textBox2.Text) * 2);
-            //        datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, false, background, new SolidBrush(btn_color.BackColor));
-            //        list.Add(dp);
-            //        textBox1.Text = list.Count.ToString();
-            //        pictureBox1.Invalidate();
-            //    }
-            //}
-
-            //////////////////////////////////////////////////////////////////
-
             if (drawline && startPaint || drawline)
             {
-                pictureBox1.Invalidate();
+                
+                if (e.Button == MouseButtons.Left)
+                {
+                    //Запоминаем конечную точку радиуса
+                    Finish1 = e.Location;
+                    //Обновляем PictureBox, чтобы вызывать его перерисовку
+                    pictureBox1.Invalidate();
+                }
                 if (!flag)
                 {
-                    g.DrawLine(pen, initX, initY, e.X, e.Y);
-
+                    g.DrawLine(pen, Start, Finish1);
+                    pictureBox1.Invalidate();
                 }
                 if (flag)
                 {
-
-                    datalist dl = new datalist(datalist.MyElenent.line, pen, initX, initY, endX, endY);
+                    datalist dl = new datalist(datalist.MyElenent.line, pen, Start.X, Start.Y, Finish.X, Finish.Y);
                     list.Add(dl);
                     flag = false;
                 }
@@ -245,28 +244,6 @@ namespace MyPaintWinForm
             if (drawRectangle && startPaint || drawRectangle)
             {
                 Finish1 = e.Location;
-                ////pictureBox1.Invalidate();
-                ////if (!flag)
-                ////{
-                ////    g.DrawRectangle(new Pen(Color.Bisque, 5), initX, initY, e.X, e.Y);
-
-                ////}
-                ////if (flag)
-                ////{
-                ////    if (checkBox1.CheckState == CheckState.Checked)
-                ////    {
-                ////        b = true;
-                ////    }
-                ////    else
-                ////    {
-                ////        b = false;
-                ////    }
-
-                ////    datalist dr = new datalist(datalist.MyElenent.rectangle, pen, initX, initY, endX, endY, b, background, new SolidBrush(btn_back_color.BackColor));
-                ////    list.Add(dr);
-                ////    flag = false;
-                ////}
-                ////textBox1.Text = list.Count.ToString();
 
             
                 if (!flag)
