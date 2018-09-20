@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MyPaintWinForm
 {
@@ -430,6 +431,26 @@ namespace MyPaintWinForm
                 btn_back_color.BackColor = c.Color;
 
             }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            if (save.ShowDialog()== DialogResult.OK)
+            {
+                
+                FileStream fs_write = new FileStream(save.FileName, FileMode.Create);
+                //pictureBox1.Image.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                StreamWriter streamWriter = new StreamWriter(fs_write);
+                streamWriter.Write(pictureBox1.Image.Save())
+                streamWriter.Close();
+            }
+            
         }
     }
 }
