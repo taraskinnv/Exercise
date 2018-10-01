@@ -113,10 +113,8 @@ namespace MyPaintWinForm
         
         private void OnMovePictureBox_Paint(object sender, PaintEventArgs e)
         {
-            //Перенос начала координат в указанный центр
-            //e.Graphics.TranslateTransform(_center.X, _center.Y);
-            //Вычисляем радиус по теореме Пифагора
-            float radius;//
+
+            float radius;
             if (drawPoint)
             {
                 radius = float.Parse(textBox2.Text)/2;
@@ -183,7 +181,7 @@ namespace MyPaintWinForm
                 }
                 if (!flag)
                 {
-                    g.DrawLine(pen, Start, Finish1);
+                    //g.DrawLine(pen, Start, Finish1);
                     pictureBox1.Invalidate();
                 }
                 if (flag)
@@ -261,7 +259,6 @@ namespace MyPaintWinForm
                 }
                 if (flag)
                 {
-                    //datalist dr = new datalist(datalist.MyElenent.circle, initX, initY, endX, endY);
                     if (checkBox1.CheckState == CheckState.Checked)
                     {
                         b = true;
@@ -287,7 +284,6 @@ namespace MyPaintWinForm
             {
                 if (list[i].myElenent== datalist.MyElenent.point)
                 {
-                    //e.Graphics.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                     e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                 }
                 else if (list[i].myElenent == datalist.MyElenent.line)
@@ -435,22 +431,78 @@ namespace MyPaintWinForm
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog save = new SaveFileDialog();
-            if (save.ShowDialog()== DialogResult.OK)
+            OpenFileDialog open = new OpenFileDialog();
+            
+            if (open.ShowDialog() == DialogResult.OK)
             {
-                
-                FileStream fs_write = new FileStream(save.FileName, FileMode.Create);
-                //pictureBox1.Image.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-                StreamWriter streamWriter = new StreamWriter(fs_write);
-                streamWriter.Write(pictureBox1.Image.Save())
-                streamWriter.Close();
+                pictureBox1.Image = new Bitmap(open.FileName);
             }
             
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                Graphics g1 = Graphics.FromImage(myBitmap);
+                Paint(g1);
+                //myBitmap.Save(fs_write, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                myBitmap.Save(save.FileName+".jpg");
+            }
+        }
+
+
+        private void Paint(Graphics g)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].myElenent == datalist.MyElenent.point)
+                {
+                    //e.Graphics.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    g.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                }
+                else if (list[i].myElenent == datalist.MyElenent.line)
+                {
+                    g.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                }
+                else if (list[i].myElenent == datalist.MyElenent.rectangle)
+                {
+                    if (list[i].ColorBackGround == false && list[i].ColorContour == true)
+                    {
+                        g.DrawRectangle(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    }
+                    else if (list[i].ColorBackGround == true && list[i].ColorContour == true)
+                    {
+                        g.FillRectangle(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                        g.DrawRectangle(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    }
+                    else if (list[i].ColorBackGround == true && list[i].ColorContour == false)
+                    {
+                        g.FillRectangle(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    }
+                }
+                else if (list[i].myElenent == datalist.MyElenent.circle)
+                {
+                    if (list[i].ColorBackGround == false && list[i].ColorContour == true)
+                    {
+                        g.DrawEllipse(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    }
+                    else if (list[i].ColorBackGround == true && list[i].ColorContour == true)
+                    {
+                        g.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                        g.DrawEllipse(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    }
+                    else if (list[i].ColorBackGround == true && list[i].ColorContour == false)
+                    {
+                        g.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    }
+                }
+
+            }
+        }
+
     }
 }
