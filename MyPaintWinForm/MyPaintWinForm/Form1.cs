@@ -461,6 +461,7 @@ namespace MyPaintWinForm
                 {
                     Graphics g1 = Graphics.FromImage(bitmap);
                     Paint(g1);
+                    
                     bitmap.Save(save.FileName + ".jpg");
                 }
                 
@@ -520,6 +521,59 @@ namespace MyPaintWinForm
             }
         }
 
-      
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            new Thread(StartS) { IsBackground = true }.Start();
+
+        }
+
+        void StartS()
+        {
+            Invert1(bitmap);
+        }
+        public Bitmap Invert(Bitmap bitmap)
+        {
+            //X Axis
+            int x;
+            //Y Axis
+            int y;
+            //For the Width
+            for (x = 0; x <= bitmap.Width - 1; x++)
+            {
+                //For the Height
+                for (y = 0; y <= bitmap.Height - 1; y += 1)
+                {
+                    //The Old Color to Replace
+                    Color oldColor = bitmap.GetPixel(x, y);
+                    //The New Color to Replace the Old Color
+                    Color newColor;
+                    //Set the Color for newColor
+                    newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
+                    //Replace the Old Color with the New Color
+                    bitmap.SetPixel(x, y, newColor);
+                }
+            }
+            //Return the Inverted Bitmap
+            return bitmap;
+        }
+
+        public void Invert1(Bitmap bitmap)
+        {
+            var temp = (Bitmap)bitmap.Clone();
+            int x;
+            int y;
+            for (y = 0; y < temp.Height; y++)
+            {
+                for (x = 0; x < temp.Width; x++)
+                {
+                    Color oldColor = temp.GetPixel(x, y);
+                    Color newColor;
+                    newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
+                    bitmap.SetPixel(x, y, newColor);
+                }
+
+                Invoke((MethodInvoker)delegate { Refresh(); });
+            }
+        }
     }
 }
