@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace MyPaintWinForm
 {
@@ -37,6 +38,8 @@ namespace MyPaintWinForm
         public Form1()
         {
             InitializeComponent();
+
+            
         }
         Graphics g;
         private void Form1_Load(object sender, EventArgs e)
@@ -428,14 +431,16 @@ namespace MyPaintWinForm
 
             }
         }
-
+        Bitmap bitmap;
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             
             if (open.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Image = new Bitmap(open.FileName);
+                bitmap = new Bitmap(open.FileName);
+                pictureBox1.Image = bitmap; //new Bitmap(open.FileName);
+
             }
             
         }
@@ -445,12 +450,23 @@ namespace MyPaintWinForm
             SaveFileDialog save = new SaveFileDialog();
             if (save.ShowDialog() == DialogResult.OK)
             {
-                Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                Graphics g1 = Graphics.FromImage(myBitmap);
-                Paint(g1);
+                if (pictureBox1.Image == null)
+                {
+                    Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                    Graphics g1 = Graphics.FromImage(myBitmap);
+                    Paint(g1);
+                    myBitmap.Save(save.FileName + ".jpg");
+                }
+                else
+                {
+                    Graphics g1 = Graphics.FromImage(bitmap);
+                    Paint(g1);
+                    bitmap.Save(save.FileName + ".jpg");
+                }
+                
                 //myBitmap.Save(fs_write, System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                myBitmap.Save(save.FileName+".jpg");
+                
             }
         }
 
@@ -504,5 +520,6 @@ namespace MyPaintWinForm
             }
         }
 
+      
     }
 }
