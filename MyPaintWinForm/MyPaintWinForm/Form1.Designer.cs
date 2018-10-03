@@ -50,6 +50,8 @@
             this.cleanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btn_backgroung_fon = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -68,9 +70,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(13, 43);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 27);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(457, 404);
+            this.pictureBox1.Size = new System.Drawing.Size(457, 483);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox1_Paint);
@@ -80,7 +82,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(582, 391);
+            this.textBox1.Location = new System.Drawing.Point(582, 452);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(69, 20);
             this.textBox1.TabIndex = 2;
@@ -161,7 +163,7 @@
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(489, 162);
+            this.panel2.Location = new System.Drawing.Point(489, 223);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(142, 219);
             this.panel2.TabIndex = 8;
@@ -249,7 +251,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(501, 388);
+            this.button2.Location = new System.Drawing.Point(501, 449);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
@@ -259,16 +261,37 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(489, 423);
+            this.progressBar1.Location = new System.Drawing.Point(489, 484);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 23);
             this.progressBar1.TabIndex = 11;
+            // 
+            // btn_backgroung_fon
+            // 
+            this.btn_backgroung_fon.Location = new System.Drawing.Point(501, 166);
+            this.btn_backgroung_fon.Name = "btn_backgroung_fon";
+            this.btn_backgroung_fon.Size = new System.Drawing.Size(117, 23);
+            this.btn_backgroung_fon.TabIndex = 10;
+            this.btn_backgroung_fon.UseVisualStyleBackColor = true;
+            this.btn_backgroung_fon.Click += new System.EventHandler(this.btn_backgroung_fon_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label3.Location = new System.Drawing.Point(515, 150);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Backgroung";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 472);
+            this.ClientSize = new System.Drawing.Size(663, 522);
+            this.Controls.Add(this.btn_backgroung_fon);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel2);
@@ -316,6 +339,8 @@
         private System.Windows.Forms.ToolStripMenuItem cleanToolStripMenuItem;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btn_backgroung_fon;
+        private System.Windows.Forms.Label label3;
     }
 }
 

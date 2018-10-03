@@ -35,17 +35,21 @@ namespace MyPaintWinForm
         float radius;
         List<datalist> list = new List<datalist>();
         Pen pen;
+        SolidBrush br;
+        Bitmap bitmap; 
         public Form1()
         {
             InitializeComponent();
-
-            
         }
         Graphics g;
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox1.BackColor = Color.White;
-            g = pictureBox1.CreateGraphics();
+            btn_backgroung_fon.BackColor = Color.White;
+           bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            //g = pictureBox1.CreateGraphics();
+            g = Graphics.FromImage(bitmap);
+            br = new SolidBrush(Color.White);
             btn_color.BackColor = Color.Black;
             btn_back_color.BackColor = pictureBox1.BackColor;
             textBox2.Text = "6";
@@ -283,6 +287,8 @@ namespace MyPaintWinForm
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            if(bitmap == null)
+                e.Graphics.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].myElenent== datalist.MyElenent.point)
@@ -431,7 +437,7 @@ namespace MyPaintWinForm
 
             }
         }
-        Bitmap bitmap;
+        
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -453,6 +459,7 @@ namespace MyPaintWinForm
                 if (pictureBox1.Image == null)
                 {
                     Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                    
                     Graphics g1 = Graphics.FromImage(myBitmap);
                     Paint(g1);
                     myBitmap.Save(save.FileName + ".jpg");
@@ -474,6 +481,8 @@ namespace MyPaintWinForm
 
         private void Paint(Graphics g)
         {
+            if (bitmap == null)
+                g.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].myElenent == datalist.MyElenent.point)
@@ -529,36 +538,13 @@ namespace MyPaintWinForm
 
         void StartS()
         {
-            Invert1(bitmap);
+            Invert(bitmap);
         }
-        public Bitmap Invert(Bitmap bitmap)
-        {
-            //X Axis
-            int x;
-            //Y Axis
-            int y;
-            //For the Width
-            for (x = 0; x <= bitmap.Width - 1; x++)
-            {
-                //For the Height
-                for (y = 0; y <= bitmap.Height - 1; y += 1)
-                {
-                    //The Old Color to Replace
-                    Color oldColor = bitmap.GetPixel(x, y);
-                    //The New Color to Replace the Old Color
-                    Color newColor;
-                    //Set the Color for newColor
-                    newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
-                    //Replace the Old Color with the New Color
-                    bitmap.SetPixel(x, y, newColor);
-                }
-            }
-            //Return the Inverted Bitmap
-            return bitmap;
-        }
+        
 
-        public void Invert1(Bitmap bitmap)
+        public void Invert(Bitmap bitmap)
         {
+            
             var temp = (Bitmap)bitmap.Clone();
             int x;
             int y;
@@ -571,8 +557,19 @@ namespace MyPaintWinForm
                     newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
                     bitmap.SetPixel(x, y, newColor);
                 }
-
                 Invoke((MethodInvoker)delegate { Refresh(); });
+            }
+        }
+
+        private void btn_backgroung_fon_Click(object sender, EventArgs e)
+        {
+            ColorDialog c = new ColorDialog();
+           
+            if (c.ShowDialog() == DialogResult.OK)
+            {
+                btn_backgroung_fon.BackColor = c.Color;
+                pictureBox1.BackColor = btn_backgroung_fon.BackColor;
+                br = new SolidBrush(c.Color);
             }
         }
     }
