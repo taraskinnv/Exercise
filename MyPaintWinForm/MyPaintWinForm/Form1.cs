@@ -412,7 +412,6 @@ namespace MyPaintWinForm
             {
                 checkBox1.CheckState = CheckState.Unchecked;
                 MessageBox.Show("измените цвет фона");
-
             }
         }
 
@@ -434,7 +433,6 @@ namespace MyPaintWinForm
             if (c.ShowDialog() == DialogResult.OK)
             {
                 btn_back_color.BackColor = c.Color;
-
             }
         }
         
@@ -446,7 +444,6 @@ namespace MyPaintWinForm
             {
                 bitmap = new Bitmap(open.FileName);
                 pictureBox1.Image = bitmap; //new Bitmap(open.FileName);
-
             }
             
         }
@@ -459,7 +456,6 @@ namespace MyPaintWinForm
                 if (pictureBox1.Image == null)
                 {
                     Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                    
                     Graphics g1 = Graphics.FromImage(myBitmap);
                     Paint(g1);
                     myBitmap.Save(save.FileName + ".jpg");
@@ -468,17 +464,10 @@ namespace MyPaintWinForm
                 {
                     Graphics g1 = Graphics.FromImage(bitmap);
                     Paint(g1);
-                    
                     bitmap.Save(save.FileName + ".jpg");
                 }
-                
-                //myBitmap.Save(fs_write, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-                
             }
         }
-
-
         private void Paint(Graphics g)
         {
             if (bitmap == null)
@@ -487,7 +476,6 @@ namespace MyPaintWinForm
             {
                 if (list[i].myElenent == datalist.MyElenent.point)
                 {
-                    //e.Graphics.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                     g.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                 }
                 else if (list[i].myElenent == datalist.MyElenent.line)
@@ -526,25 +514,28 @@ namespace MyPaintWinForm
                         g.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                     }
                 }
-
             }
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             new Thread(StartS) { IsBackground = true }.Start();
-
+            new Thread(Prog) { IsBackground = true }.Start();
         }
 
-        void StartS()
+        private void StartS()
         {
             Invert(bitmap);
+        }
+
+        private void Prog()
+        {
+                Invoke((MethodInvoker)delegate { Refresh(); });
         }
         
 
         public void Invert(Bitmap bitmap)
         {
-            
             var temp = (Bitmap)bitmap.Clone();
             int x;
             int y;
@@ -557,6 +548,7 @@ namespace MyPaintWinForm
                     newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
                     bitmap.SetPixel(x, y, newColor);
                 }
+                progressBar1.Value++;
                 Invoke((MethodInvoker)delegate { Refresh(); });
             }
         }
@@ -564,7 +556,6 @@ namespace MyPaintWinForm
         private void btn_backgroung_fon_Click(object sender, EventArgs e)
         {
             ColorDialog c = new ColorDialog();
-           
             if (c.ShowDialog() == DialogResult.OK)
             {
                 btn_backgroung_fon.BackColor = c.Color;
