@@ -38,6 +38,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
@@ -59,15 +63,14 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -169,6 +172,38 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(509, 311);
             this.panel2.TabIndex = 3;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 255);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(51, 13);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Договор";
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(6, 271);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(230, 20);
+            this.textBox10.TabIndex = 15;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 188);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(74, 13);
+            this.label15.TabIndex = 14;
+            this.label15.Text = "Организация";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(6, 204);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(477, 20);
+            this.textBox9.TabIndex = 13;
             // 
             // dateTimePicker3
             // 
@@ -349,38 +384,6 @@
             this.label14.TabIndex = 21;
             this.label14.Text = "Дата его выдачи";
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 188);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(74, 13);
-            this.label15.TabIndex = 14;
-            this.label15.Text = "Организация";
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(6, 204);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(477, 20);
-            this.textBox9.TabIndex = 13;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 255);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(51, 13);
-            this.label16.TabIndex = 16;
-            this.label16.Text = "Договор";
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(6, 271);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(230, 20);
-            this.textBox10.TabIndex = 15;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(964, 393);
@@ -391,11 +394,27 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(26, 43);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(392, 20);
+            this.textBox11.TabIndex = 10;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.textBox11);
+            this.panel4.Location = new System.Drawing.Point(18, 329);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(457, 127);
+            this.panel4.TabIndex = 8;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 478);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -410,6 +429,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -452,5 +473,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Panel panel4;
     }
 }

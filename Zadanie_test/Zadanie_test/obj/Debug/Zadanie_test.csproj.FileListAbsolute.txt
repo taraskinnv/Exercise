@@ -1,0 +1,11 @@
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\bin\Debug\Zadanie_test.exe.config
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\bin\Debug\Zadanie_test.exe
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\bin\Debug\Zadanie_test.pdb
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.csprojResolveAssemblyReference.cache
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.Form1.resources
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.Form2.resources
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.Properties.Resources.resources
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.csproj.GenerateResource.Cache
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.csproj.CoreCompileInputs.cache
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.exe
+C:\Users\Коля\Documents\home_work\Zadanie_test\Zadanie_test\obj\Debug\Zadanie_test.pdb

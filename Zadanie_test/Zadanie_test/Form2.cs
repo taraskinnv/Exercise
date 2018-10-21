@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,27 +13,81 @@ namespace Zadanie_test
 {
     public partial class Form2 : Form
     {
-        Form1 f1;
-        List<Document> doc;
+        List<Document> doc2;
         int number;
-        public Form2(List<Document> l, int number)
+        bool q;
+        public Form2(List<Document> l, int number, bool q)
         {
             InitializeComponent();
-            f1 = form1;
-            doc = l;
+            doc2 = l;
             this.number = number;
+            this.q = q;
         }
 
         
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            doc[number].
+            panel1.Visible = false;
+            if (q== false)
+            {
+                textBox11.Text = doc2[number].TMV;
+                textBox6.Text = doc2[number].Document_Number;
+                textBox4.Text = doc2[number].Issued_to;
+                textBox9.Text = doc2[number].Organization;
+                textBox10.Text = doc2[number].Contract;
+                textBox5.Text = doc2[number].Doc_series;
+                textBox7.Text = doc2[number].Doc_Number;
+                textBox8.Text = doc2[number].Issued_by;
+                
+                string format ="dd.MM.yyyy";
+                dateTimePicker1.CustomFormat = format;
+                dateTimePicker1.Format = DateTimePickerFormat.Custom;
+                dateTimePicker1.Value = DateTime.ParseExact(doc2[number].Date_of_issue, format, CultureInfo.InvariantCulture);
+                dateTimePicker2.CustomFormat = format;
+                dateTimePicker2.Format = DateTimePickerFormat.Custom;
+                dateTimePicker2.Value = DateTime.ParseExact(doc2[number].Valid_until, format, CultureInfo.InvariantCulture);
+                dateTimePicker3.CustomFormat = format;
+                dateTimePicker3.Format = DateTimePickerFormat.Custom;
+                dateTimePicker3.Value = DateTime.ParseExact(doc2[number].Document_Date, format, CultureInfo.InvariantCulture);
+                dateTimePicker4.CustomFormat = format;
+                dateTimePicker4.Format = DateTimePickerFormat.Custom;
+                dateTimePicker4.Value = DateTime.ParseExact(doc2[number].Date_his_issue, format, CultureInfo.InvariantCulture);
+
+                comboBox1.Items.Add(doc2[number].Type_of_identity_Doc);
+                comboBox1.SelectedIndex = 0;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            if (q != false)
+            {
+                //doc2[number].Date_of_issue = dateTimePicker1.Value.ToShortDateString();
+                doc2.Add(new Document(textBox11.Text, dateTimePicker1.Value.ToShortDateString(),
+                    dateTimePicker2.Value.ToShortDateString(), textBox6.Text, dateTimePicker3.Value.ToShortDateString(),
+                    textBox4.Text, "Pass", textBox5.Text, textBox7.Text, dateTimePicker1.Value.ToShortDateString(),
+                    textBox8.Text, textBox9.Text, textBox10.Text, 50));
+            }
+            else
+            {
+                doc2[number].TMV = textBox11.Text;
+                doc2[number].Document_Number  = textBox6.Text;
+                doc2[number].Issued_to = textBox4.Text;
+                doc2[number].Organization = textBox9.Text;
+                doc2[number].Contract = textBox10.Text;
+                doc2[number].Doc_series = textBox5.Text;
+                doc2[number].Doc_Number = textBox7.Text;
+                doc2[number].Issued_by = textBox8.Text;
+
+                doc2[number].Date_of_issue = dateTimePicker1.Value.ToShortDateString();
+                doc2[number].Valid_until = dateTimePicker2.Value.ToShortDateString();
+                doc2[number].Document_Date = dateTimePicker3.Value.ToShortDateString();
+                doc2[number].Date_his_issue = dateTimePicker4.Value.ToShortDateString();
+
+                doc2[number].Type_of_identity_Doc = comboBox1.Text;
+            }
+            this.Close();
         }
     }
 }

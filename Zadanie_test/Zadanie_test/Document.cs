@@ -9,7 +9,7 @@ namespace Zadanie_test
 {
     public class Document
     {
-        public string TMV { get; }  // товарно-материальные ценности
+        public string TMV { get; set; }  // товарно-материальные ценности
         //string nomination { get; set; }
         public string Date_of_issue { get; set; }  // Дата выдачи
         public string Valid_until { get; set; }    // Действительна до .... (Дата)
