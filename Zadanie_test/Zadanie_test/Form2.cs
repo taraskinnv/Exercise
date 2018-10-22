@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Zadanie_test
@@ -28,7 +22,7 @@ namespace Zadanie_test
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            panel1.Visible = false;
+            panel1.Visible = false;// доделать с нормальной формой и нормальмым заполнением
             if (q== false)
             {
                 textBox11.Text = doc2[number].TMV;
@@ -39,7 +33,9 @@ namespace Zadanie_test
                 textBox5.Text = doc2[number].Doc_series;
                 textBox7.Text = doc2[number].Doc_Number;
                 textBox8.Text = doc2[number].Issued_by;
-                
+                textBox12.Text = doc2[number].Amount.ToString();
+
+
                 string format ="dd.MM.yyyy";
                 dateTimePicker1.CustomFormat = format;
                 dateTimePicker1.Format = DateTimePickerFormat.Custom;
@@ -63,11 +59,10 @@ namespace Zadanie_test
         {
             if (q != false)
             {
-                //doc2[number].Date_of_issue = dateTimePicker1.Value.ToShortDateString();
                 doc2.Add(new Document(textBox11.Text, dateTimePicker1.Value.ToShortDateString(),
                     dateTimePicker2.Value.ToShortDateString(), textBox6.Text, dateTimePicker3.Value.ToShortDateString(),
-                    textBox4.Text, "Pass", textBox5.Text, textBox7.Text, dateTimePicker1.Value.ToShortDateString(),
-                    textBox8.Text, textBox9.Text, textBox10.Text, 50));
+                    textBox4.Text, comboBox1.Text, textBox5.Text, textBox7.Text, dateTimePicker1.Value.ToShortDateString(),
+                    textBox8.Text, textBox9.Text, textBox10.Text,Int32.Parse(textBox12.Text)));
             }
             else
             {

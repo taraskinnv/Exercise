@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Zadanie_test
@@ -37,35 +31,44 @@ namespace Zadanie_test
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             doc = new List<Document>();
-            DateTimePicker datatimepic = new DateTimePicker();
-            doc.Add(new Document("1 Дизель л 100", "10.06.2018", "31.10.2018", "1", "19.10.2018", "Иванов Иван Иванович", "Passport", "АА", "123456", "19.10.2000", "РВ УМВС", "Албатрос", "as123", 100));
-            doc.Add(new Document("2 Дизель1 л 50", "10.10.2018", "30.11.2018", "2", "19.10.2018", "Иванов Иван Иванович", "Passport", "АB", "321654", "01.01.1978", "РВ УМВС", "Албатрос", "as123", 50));
-            doc.Add(new Document("3 Дизель2 л 1000", "10.10.2018", "31.10.2018", "3", "19.10.2018", "Иванов Иван Иванович", "Passport", "АH", "000001", "07.07.1963", "РВ УМВС", "Албатрос", "as123", 1000));
+
+            doc.Add(new Document("1 Дизель л", "10.06.2018", "24.10.2018", "1", "19.10.2018", "Иванов Иван Иванович", "Passport", "АА", "123456", "19.10.2000", "РВ УМВС", "Албатрос", "as123", 100));
+            doc.Add(new Document("2 Дизель1 л", "10.10.2018", "24.10.2018", "2", "19.10.2018", "Иванов Иван Иванович", "Passport", "АB", "321654", "01.01.1978", "РВ УМВС", "Албатрос", "as124", 50));
+            doc.Add(new Document("3 Дизель2 л", "10.10.2018", "31.10.2018", "3", "19.10.2018", "Иванов Иван Иванович", "Passport", "АH", "000001", "07.07.1963", "РВ УМВС", "Албатрос", "as125", 1000));
             UpdateDateG();
 
-            string str;
+            string str =null;   // документы которые заврешаются завтра
             foreach (var item in doc)
             {
                 DateTime date = DateTime.ParseExact(item.Valid_until, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                //date = date.AddDays(1);
-                TimeSpan timeSpan = DateTime.Now - date;
-
-                str = timeSpan.Days.ToString();
+                TimeSpan timeSpan = date - DateTime.Now;
+                if (timeSpan.Days == 0)
+                {
+                    str += $"Завтра заканчивается договор № {item.Document_Number}" + "\n";
+                }
             }
-
+            if (str != null)
+            {
+                MessageBox.Show(str);
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)      //Изменить документ
         {
-            int a = dataGridView1.SelectedCells[0].RowIndex;
-            f2 = new Form2(doc, a, false);
-            f2.ShowDialog();
-            UpdateDateG();
-
-
+            if (dataGridView1.SelectedCells[0].RowIndex < doc.Count)
+            {
+                int a = dataGridView1.SelectedCells[0].RowIndex;
+                f2 = new Form2(doc, a, false);
+                f2.ShowDialog();
+                UpdateDateG();
+            }
+            else
+            {
+                MessageBox.Show("Выберите договор!!!");
+            }
         }
 
-        private void UpdateDateG()
+        private void UpdateDateG() // обновление dataGridView1
         {
             while (dataGridView1.RowCount != 1)     //очистка dataGridView1
             {
@@ -77,7 +80,7 @@ namespace Zadanie_test
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)      // Добавить документ
         {
             int a = dataGridView1.RowCount;
             f2 = new Form2(doc, a, true);
@@ -85,10 +88,17 @@ namespace Zadanie_test
             UpdateDateG();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)  //  удалить документ
         {
-            doc.RemoveAt(dataGridView1.SelectedCells[0].RowIndex);
-            UpdateDateG();
+            if (dataGridView1.SelectedCells[0].RowIndex < doc.Count)
+            {
+                doc.RemoveAt(dataGridView1.SelectedCells[0].RowIndex);
+                UpdateDateG();
+            }
+            else
+            {
+                MessageBox.Show("Выберите договор!!!");
+            }
         }
     }
 }
