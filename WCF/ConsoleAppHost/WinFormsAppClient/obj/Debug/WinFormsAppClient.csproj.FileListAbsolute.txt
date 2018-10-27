@@ -1,0 +1,9 @@
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\bin\Debug\WinFormsAppClient.exe.config
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\obj\Debug\WinFormsAppClient.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\obj\Debug\WinFormsAppClient.Form1.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\obj\Debug\WinFormsAppClient.Properties.Resources.resources
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\obj\Debug\WinFormsAppClient.csproj.GenerateResource.Cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\bin\Debug\WinFormsAppClient.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\bin\Debug\WinFormsAppClient.pdb
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\obj\Debug\WinFormsAppClient.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\WinFormsAppClient\obj\Debug\WinFormsAppClient.pdb
