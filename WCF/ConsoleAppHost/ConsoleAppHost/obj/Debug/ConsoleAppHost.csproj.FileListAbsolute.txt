@@ -1,0 +1,6 @@
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\ConsoleAppHost\bin\Debug\ConsoleAppHost.exe.config
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\ConsoleAppHost\bin\Debug\ConsoleAppHost.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\ConsoleAppHost\bin\Debug\ConsoleAppHost.pdb
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\ConsoleAppHost\obj\Debug\ConsoleAppHost.csprojResolveAssemblyReference.cache
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\ConsoleAppHost\obj\Debug\ConsoleAppHost.exe
+c:\users\taraskinnv\documents\visual studio 2015\Projects\ConsoleAppHost\ConsoleAppHost\obj\Debug\ConsoleAppHost.pdb
