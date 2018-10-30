@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace MyPaintWinForm
 {
+    public delegate void Progbar();
     public partial class Form1 : Form
     {
         Point MouseLoc = new Point(0, 0);
@@ -37,6 +38,7 @@ namespace MyPaintWinForm
         Pen pen;
         SolidBrush br;
         Bitmap bitmap; 
+
         public Form1()
         {
             InitializeComponent();
@@ -55,6 +57,13 @@ namespace MyPaintWinForm
             textBox2.Text = "6";
             pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
             checkBox1.CheckState = CheckState.Checked;
+
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = pictureBox1.Height - 1;
+            progressBar1.Value = 1;
+            progressBar1.Step = 1;
+            
+           
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -455,9 +464,9 @@ namespace MyPaintWinForm
             {
                 if (pictureBox1.Image == null)
                 {
-                    Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                    Graphics g1 = Graphics.FromImage(myBitmap);
-                    Paint(g1);
+                    Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);// доделать
+                    //Graphics g1 = Graphics.FromImage(myBitmap);
+                    //Paint(g1);
                     myBitmap.Save(save.FileName + ".jpg");
                 }
                 else
@@ -516,11 +525,12 @@ namespace MyPaintWinForm
                 }
             }
         }
-
+        Thread MyThread;
         private void button2_Click_1(object sender, EventArgs e)
         {
-            new Thread(StartS) { IsBackground = true }.Start();
-            new Thread(Prog) { IsBackground = true }.Start();
+            MyThread = new Thread(StartS);
+            MyThread.IsBackground = true;
+            MyThread.Start();
         }
 
         private void StartS()
@@ -528,15 +538,17 @@ namespace MyPaintWinForm
             Invert(bitmap);
         }
 
-        private void Prog()
-        {
-                Invoke((MethodInvoker)delegate { Refresh(); });
-        }
-        
-
         public void Invert(Bitmap bitmap)
         {
+
+            Action progMet = progressBar1.PerformStep;
             var temp = (Bitmap)bitmap.Clone();
+
+            //this.Invoke(new Action(() => progressBar1.Minimum = 0));
+            //this.Invoke(new Action(() => progressBar1.Maximum = temp.Height - 1));
+            //this.Invoke(new Action(() => progressBar1.Value = 1));
+            //this.Invoke(new Action(() => progressBar1.Step = 1));
+
             int x;
             int y;
             for (y = 0; y < temp.Height; y++)
@@ -547,9 +559,14 @@ namespace MyPaintWinForm
                     Color newColor;
                     newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
                     bitmap.SetPixel(x, y, newColor);
+                    
                 }
-                progressBar1.Value++;
-                Invoke((MethodInvoker)delegate { Refresh(); });
+
+                //this.Invoke(new Action(() => progressBar1.PerformStep()));
+
+                progMet.Invoke();
+                Refresh();
+                //Invoke((MethodInvoker)delegate { Refresh(); });
             }
         }
 
