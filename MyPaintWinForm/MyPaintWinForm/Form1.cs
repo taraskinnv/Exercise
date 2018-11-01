@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing.Drawing2D;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 using System.Threading;
 
 namespace MyPaintWinForm
@@ -34,6 +27,7 @@ namespace MyPaintWinForm
         bool drawCircle = false;
         bool paint = false;
         float radius;
+        bool btnBackgroungFon = false;
         List<datalist> list = new List<datalist>();
         Pen pen;
         SolidBrush br;
@@ -46,11 +40,14 @@ namespace MyPaintWinForm
         Graphics g;
         private void Form1_Load(object sender, EventArgs e)
         {
+            StartNew();
+        }
+
+        private void StartNew() //параметры по умолчанию
+        {
             pictureBox1.BackColor = Color.White;
             btn_backgroung_fon.BackColor = Color.White;
-           bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            //g = pictureBox1.CreateGraphics();
-            g = Graphics.FromImage(bitmap);
+            bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             br = new SolidBrush(Color.White);
             btn_color.BackColor = Color.Black;
             btn_back_color.BackColor = pictureBox1.BackColor;
@@ -62,8 +59,6 @@ namespace MyPaintWinForm
             progressBar1.Maximum = pictureBox1.Height - 1;
             progressBar1.Value = 1;
             progressBar1.Step = 1;
-            
-           
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -73,11 +68,7 @@ namespace MyPaintWinForm
             {
                 startPaint = true;
                 flag = false;
-                //
-                //Запоминаем центр
                 _center = new Point(e.X, e.Y);
-                //Назначаем нужный метод рисования.
-                //pictureBox1.Paint -= PictureBox1_Paint;
                 pictureBox1.Paint += OnMovePictureBox_Paint;
             }
             if (e.Button == MouseButtons.Left && drawline)
@@ -85,7 +76,6 @@ namespace MyPaintWinForm
                 Start = new Point(e.X, e.Y);
                 startPaint = true;
                 flag = false;
-
                 pictureBox1.Paint += OnMovePictureBox_Paint;
             }
             if (e.Button == MouseButtons.Left && drawPoint)
@@ -94,7 +84,6 @@ namespace MyPaintWinForm
                 flag = false;
                 _center = new Point(e.X, e.Y);
                 DrowP = true;
-
             }
             if (e.Button == MouseButtons.Left && drawRectangle)
             {
@@ -102,11 +91,8 @@ namespace MyPaintWinForm
                 Start1 = new Point(e.X, e.Y);
                 startPaint = true;
                 flag = false;
-                //
                 //Запоминаем центр
                 _center = new Point(e.X, e.Y);
-                //Назначаем нужный метод рисования.
-                //pictureBox1.Paint -= PictureBox1_Paint;
                 pictureBox1.Paint += OnMovePictureBox_Paint;
             }
         }
@@ -119,17 +105,13 @@ namespace MyPaintWinForm
             Finish = new Point(e.X, e.Y);
             //Запоминаем конечную точку радиуса
             _endPoint = new Point(e.X, e.Y);
-            //Переназначаем методы рисования
+            //Переназначаем метод рисования
             pictureBox1.Paint -= OnMovePictureBox_Paint;
-            //pictureBox1.Paint += PictureBox1_Paint;
-            //Обновляем
             pictureBox1.Invalidate();
-
         }
         
         private void OnMovePictureBox_Paint(object sender, PaintEventArgs e)
         {
-
             float radius;
             if (drawPoint)
             {
@@ -146,7 +128,6 @@ namespace MyPaintWinForm
             if (drawCircle)
             {
                 e.Graphics.TranslateTransform(_center.X, _center.Y);
-                //e.Graphics.FillEllipse(new SolidBrush(btn_color.BackColor), -radius, -radius, radius * 2, radius * 2);
                 e.Graphics.DrawEllipse(pen,  -radius, -radius, radius * 2, radius * 2);
             }
             if (drawPoint)
@@ -161,7 +142,6 @@ namespace MyPaintWinForm
                     int a = Start.X;
                     Start1.X = Finish1.X;
                     Finish1.X = a;
-
                 }
                 if (Start.Y > Finish1.Y)
                 {
@@ -169,7 +149,6 @@ namespace MyPaintWinForm
                     Start1.Y = Finish1.Y;
                     Finish1.Y = a;
                 }
-                //e.Graphics.FillRectangle(new SolidBrush(btn_color.BackColor), Start1.X, Start1.Y, Finish1.X - Start1.X, Finish1.Y - Start1.Y);
                 e.Graphics.DrawRectangle(pen, Start1.X, Start1.Y, Finish1.X - Start1.X, Finish1.Y - Start1.Y);
             }
         }
@@ -179,12 +158,9 @@ namespace MyPaintWinForm
             if (DrowP)
             {
                 datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X, _center.Y, e.X, e.Y);
-                g.DrawLine(pen, _center.X, _center.Y, e.X, e.Y);
                 list.Add(dp);
-                textBox1.Text = list.Count.ToString();
                 _center = e.Location;
                 pictureBox1.Invalidate();
-
             }
             if (drawline && paint)
             {
@@ -197,7 +173,6 @@ namespace MyPaintWinForm
                 }
                 if (!flag)
                 {
-                    //g.DrawLine(pen, Start, Finish1);
                     pictureBox1.Invalidate();
                 }
                 if (flag)
@@ -206,14 +181,10 @@ namespace MyPaintWinForm
                     list.Add(dl);
                     flag = false;
                 }
-                textBox1.Text = list.Count.ToString();
-
             }
             if (drawRectangle && paint)
             {
                 Finish1 = e.Location;
-
-            
                 if (!flag)
                 {
                     if (e.Button == MouseButtons.Left)
@@ -226,7 +197,6 @@ namespace MyPaintWinForm
                 }
                 if (flag)
                 {
-                    //datalist dr = new datalist(datalist.MyElenent.circle, initX, initY, endX, endY);
                     if (checkBox1.CheckState == CheckState.Checked)
                     {
                         b = true;
@@ -243,6 +213,7 @@ namespace MyPaintWinForm
                         Finish.X = a;
 
                     }
+
                     if (Start.Y > Finish.Y)
                     {
                         int a = Start.Y;
@@ -253,18 +224,13 @@ namespace MyPaintWinForm
                     list.Add(dr);
                     flag = false;
                 }
-                textBox1.Text = list.Count.ToString();
                 pictureBox1.Invalidate();
-
             }
             if (drawCircle && paint)
             {
 
                 if (!flag)
                 {
-                    //g.DrawEllipse(pen, initX, initY, e.X, e.Y);
-
-
                     if (e.Button == MouseButtons.Left)
                     {
                         //Запоминаем конечную точку радиуса
@@ -284,20 +250,17 @@ namespace MyPaintWinForm
                         b = false;
                     }
                     radius = (float)Math.Sqrt(Math.Pow(_endPoint.X - _center.X, 2) + Math.Pow(_endPoint.Y - _center.Y, 2));
-                    g.TranslateTransform(_center.X, _center.Y);
                     datalist dr = new datalist(datalist.MyElenent.circle, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, b, background, new SolidBrush(btn_back_color.BackColor));
                     list.Add(dr);
                     flag = false;
                 }
-                textBox1.Text = list.Count.ToString();
                 pictureBox1.Invalidate();
             }
         }
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            if(bitmap == null)
-                e.Graphics.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
+            
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].myElenent== datalist.MyElenent.point)
@@ -340,7 +303,6 @@ namespace MyPaintWinForm
                         e.Graphics.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                     }
                 }
-
             }
         }
 
@@ -358,7 +320,6 @@ namespace MyPaintWinForm
             ////g.Clear(Color.White);
             //pictureBox1.Paint += PictureBox1_Paint;
             //pictureBox1.Invalidate();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -452,7 +413,7 @@ namespace MyPaintWinForm
             if (open.ShowDialog() == DialogResult.OK)
             {
                 bitmap = new Bitmap(open.FileName);
-                pictureBox1.Image = bitmap; //new Bitmap(open.FileName);
+                pictureBox1.Image = bitmap;
             }
             
         }
@@ -462,24 +423,26 @@ namespace MyPaintWinForm
             SaveFileDialog save = new SaveFileDialog();
             if (save.ShowDialog() == DialogResult.OK)
             {
-                if (pictureBox1.Image == null)
-                {
-                    Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);// доделать
-                    //Graphics g1 = Graphics.FromImage(myBitmap);
-                    //Paint(g1);
-                    myBitmap.Save(save.FileName + ".jpg");
-                }
-                else
-                {
-                    Graphics g1 = Graphics.FromImage(bitmap);
-                    Paint(g1);
-                    bitmap.Save(save.FileName + ".jpg");
-                }
+                //if (pictureBox1.Image == null)
+                //{
+                //    Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                //    Graphics g1 = Graphics.FromImage(myBitmap);
+                //    Paint(g1);
+                //    myBitmap.Save(save.FileName + ".jpg");
+                //}
+                //else
+                //{
+                //    Graphics g1 = Graphics.FromImage(bitmap);
+                //    Paint(g1);
+                //    bitmap.Save(save.FileName + ".jpg");
+                //}
+                Bitmap saveBitmap = ClonBitmap();
+                saveBitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             }
         }
         private void Paint(Graphics g)
         {
-            if (bitmap == null)
+            if (pictureBox1.Image == null)
                 g.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
             for (int i = 0; i < list.Count; i++)
             {
@@ -525,6 +488,19 @@ namespace MyPaintWinForm
                 }
             }
         }
+
+        private Bitmap ClonBitmap()
+        {
+            Bitmap newBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            if (pictureBox1.Image != null)
+            {
+                newBitmap = (Bitmap)bitmap.Clone();
+            }
+            Graphics g1 = Graphics.FromImage(newBitmap);
+            Paint(g1);
+            return newBitmap;
+        }
+
         Thread MyThread;
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -538,17 +514,11 @@ namespace MyPaintWinForm
             Invert(bitmap);
         }
 
-        public void Invert(Bitmap bitmap)
+        public void Invert(Bitmap bitmap)   // инвертирование цветов
         {
 
             Action progMet = progressBar1.PerformStep;
             var temp = (Bitmap)bitmap.Clone();
-
-            //this.Invoke(new Action(() => progressBar1.Minimum = 0));
-            //this.Invoke(new Action(() => progressBar1.Maximum = temp.Height - 1));
-            //this.Invoke(new Action(() => progressBar1.Value = 1));
-            //this.Invoke(new Action(() => progressBar1.Step = 1));
-
             int x;
             int y;
             for (y = 0; y < temp.Height; y++)
@@ -570,7 +540,7 @@ namespace MyPaintWinForm
             }
         }
 
-        private void btn_backgroung_fon_Click(object sender, EventArgs e)
+        private void btn_backgroung_fon_Click(object sender, EventArgs e)   // смена цвета фона
         {
             ColorDialog c = new ColorDialog();
             if (c.ShowDialog() == DialogResult.OK)
@@ -579,6 +549,13 @@ namespace MyPaintWinForm
                 pictureBox1.BackColor = btn_backgroung_fon.BackColor;
                 br = new SolidBrush(c.Color);
             }
+        }
+
+        private void cleanToolStripMenuItem_Click(object sender, EventArgs e)   // очистка полей полностью
+        {
+            list.Clear();
+            bitmap = ClonBitmap();
+            StartNew();
         }
     }
 }
