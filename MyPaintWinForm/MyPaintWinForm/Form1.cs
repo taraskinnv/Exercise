@@ -27,17 +27,15 @@ namespace MyPaintWinForm
         bool drawCircle = false;
         bool paint = false;
         float radius;
-        bool btnBackgroungFon = false;
         List<datalist> list = new List<datalist>();
         Pen pen;
         SolidBrush br;
-        Bitmap bitmap; 
+        static Bitmap bitmap;
 
         public Form1()
         {
             InitializeComponent();
         }
-        Graphics g;
         private void Form1_Load(object sender, EventArgs e)
         {
             StartNew();
@@ -59,6 +57,20 @@ namespace MyPaintWinForm
             progressBar1.Maximum = pictureBox1.Height - 1;
             progressBar1.Value = 1;
             progressBar1.Step = 1;
+
+            button2.Click += Button2_Click;
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (bBack.Enabled)
+            {
+                bBack.Enabled = false;
+            }
+            else
+            {
+                bBack.Enabled = true;
+            }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -133,7 +145,7 @@ namespace MyPaintWinForm
             if (drawPoint)
             {
                 e.Graphics.TranslateTransform(_center.X, _center.Y);
-                g.FillEllipse(new SolidBrush(btn_color.BackColor),_center.X -radius, _center.Y- radius, radius * 2, radius * 2);
+                e.Graphics.FillEllipse(new SolidBrush(btn_color.BackColor),_center.X -radius, _center.Y- radius, radius * 2, radius * 2);
             }
             if (drawRectangle)
             {
@@ -153,7 +165,7 @@ namespace MyPaintWinForm
             }
         }
 
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e) //при движении мышки
         {
             if (DrowP)
             {
@@ -260,7 +272,10 @@ namespace MyPaintWinForm
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            
+            if (pictureBox1.Image == null)
+            {
+                e.Graphics.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
+            }
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].myElenent== datalist.MyElenent.point)
@@ -381,7 +396,7 @@ namespace MyPaintWinForm
             if (btn_color.BackColor == pictureBox1.BackColor)
             {
                 checkBox1.CheckState = CheckState.Unchecked;
-                MessageBox.Show("измените цвет фона");
+                MessageBox.Show("Измените цвет фона");
             }
         }
 
@@ -414,6 +429,7 @@ namespace MyPaintWinForm
             {
                 bitmap = new Bitmap(open.FileName);
                 pictureBox1.Image = bitmap;
+                btn_backgroung_fon.Enabled = false;
             }
             
         }
@@ -436,14 +452,20 @@ namespace MyPaintWinForm
                 //    Paint(g1);
                 //    bitmap.Save(save.FileName + ".jpg");
                 //}
-                Bitmap saveBitmap = ClonBitmap();
-                saveBitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                //bitmap = ClonBitmap();
+                //pictureBox1.Image = bitmap;
+                //bitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                //ClonBitmap().Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             }
         }
         private void Paint(Graphics g)
         {
-            if (pictureBox1.Image == null)
+            //if (pictureBox1.Image != bitmap)
+            if(pictureBox1.Image == null)
+            {
                 g.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
+            }
             for (int i = 0; i < list.Count; i++)
             {
                 if (list[i].myElenent == datalist.MyElenent.point)
@@ -488,56 +510,50 @@ namespace MyPaintWinForm
                 }
             }
         }
-
-        private Bitmap ClonBitmap()
+        
+        private void ClonBitmap()
         {
-            Bitmap newBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            if (pictureBox1.Image != null)
-            {
-                newBitmap = (Bitmap)bitmap.Clone();
-            }
-            Graphics g1 = Graphics.FromImage(newBitmap);
+            
+            Graphics g1 = Graphics.FromImage(bitmap);
             Paint(g1);
-            return newBitmap;
+            pictureBox1.Image = bitmap;
         }
 
         Thread MyThread;
         private void button2_Click_1(object sender, EventArgs e)
         {
-            MyThread = new Thread(StartS);
+            ClonBitmap();
+            list.Clear();
+
+            pictureBox1.Enabled = false;
+
+            MyThread = new Thread(new ParameterizedThreadStart(this.Invert));
+            MyThread.Name = "qwerty";
             MyThread.IsBackground = true;
-            MyThread.Start();
+            MyThread.Start(bitmap);
         }
 
-        private void StartS()
+        public void Invert(object obj)   // инвертирование цветов
         {
-            Invert(bitmap);
-        }
-
-        public void Invert(Bitmap bitmap)   // инвертирование цветов
-        {
-
+            Bitmap bitmap1 = obj as Bitmap;
             Action progMet = progressBar1.PerformStep;
-            var temp = (Bitmap)bitmap.Clone();
-            int x;
-            int y;
-            for (y = 0; y < temp.Height; y++)
+            var temp = (Bitmap)bitmap1.Clone();
+
+            for (int y = 0; y < temp.Height; y++)
             {
-                for (x = 0; x < temp.Width; x++)
+                for (int x = 0; x < temp.Width; x++)
                 {
                     Color oldColor = temp.GetPixel(x, y);
-                    Color newColor;
-                    newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
-                    bitmap.SetPixel(x, y, newColor);
-                    
+                    Color newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
+                    bitmap1.SetPixel(x, y, newColor);
                 }
-
                 //this.Invoke(new Action(() => progressBar1.PerformStep()));
-
                 progMet.Invoke();
+                //Invoke((MethodInvoker)delegate { Refresh();});
+                
                 Refresh();
-                //Invoke((MethodInvoker)delegate { Refresh(); });
             }
+            pictureBox1.Invoke(new Action(() => pictureBox1.Enabled = true));
         }
 
         private void btn_backgroung_fon_Click(object sender, EventArgs e)   // смена цвета фона
@@ -554,8 +570,15 @@ namespace MyPaintWinForm
         private void cleanToolStripMenuItem_Click(object sender, EventArgs e)   // очистка полей полностью
         {
             list.Clear();
-            bitmap = ClonBitmap();
+            pictureBox1.Image = null;
             StartNew();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            list.RemoveAt(list.Count - 1);
+            pictureBox1.Invalidate();
+        }
+        
     }
 }

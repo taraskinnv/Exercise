@@ -51,6 +51,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_backgroung_fon = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.bBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -155,7 +156,7 @@
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(489, 223);
+            this.panel2.Location = new System.Drawing.Point(489, 195);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(142, 219);
             this.panel2.TabIndex = 8;
@@ -224,31 +225,31 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "Save as";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // cleanToolStripMenuItem
             // 
             this.cleanToolStripMenuItem.Name = "cleanToolStripMenuItem";
-            this.cleanToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cleanToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.cleanToolStripMenuItem.Text = "Clean";
             this.cleanToolStripMenuItem.Click += new System.EventHandler(this.cleanToolStripMenuItem_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(501, 449);
+            this.button2.Location = new System.Drawing.Point(501, 420);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
+            this.button2.Text = "Inversion";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -256,7 +257,7 @@
             // 
             this.progressBar1.Location = new System.Drawing.Point(489, 487);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(142, 23);
+            this.progressBar1.Size = new System.Drawing.Size(129, 23);
             this.progressBar1.TabIndex = 11;
             // 
             // btn_backgroung_fon
@@ -278,11 +279,22 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Backgroung";
             // 
+            // bBack
+            // 
+            this.bBack.Location = new System.Drawing.Point(501, 449);
+            this.bBack.Name = "bBack";
+            this.bBack.Size = new System.Drawing.Size(75, 23);
+            this.bBack.TabIndex = 12;
+            this.bBack.Text = "back";
+            this.bBack.UseVisualStyleBackColor = true;
+            this.bBack.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 522);
+            this.Controls.Add(this.bBack);
             this.Controls.Add(this.btn_backgroung_fon);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.progressBar1);
@@ -332,6 +344,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btn_backgroung_fon;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button bBack;
     }
 }
 
