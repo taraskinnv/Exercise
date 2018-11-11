@@ -7,6 +7,8 @@ using System.Threading;
 namespace MyPaintWinForm
 {
     public delegate void Progbar();
+
+
     public partial class Form1 : Form
     {
         Point MouseLoc = new Point(0, 0);
@@ -39,6 +41,20 @@ namespace MyPaintWinForm
         private void Form1_Load(object sender, EventArgs e)
         {
             StartNew();
+            pictureBox1.Paint += OnRemove;
+            bBack.Enabled = false;
+        }
+
+        private void OnRemove(object sender, PaintEventArgs e)
+        {
+            if (list.Count!=0)
+            {
+                bBack.Enabled = true;
+            }
+            else
+            {
+                bBack.Enabled = false;
+            }
         }
 
         private void StartNew() //параметры по умолчанию
@@ -53,10 +69,7 @@ namespace MyPaintWinForm
             pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
             checkBox1.CheckState = CheckState.Checked;
 
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = pictureBox1.Height - 1;
-            progressBar1.Value = 1;
-            progressBar1.Step = 1;
+            
 
             button2.Click += Button2_Click;
         }
@@ -439,24 +452,9 @@ namespace MyPaintWinForm
             SaveFileDialog save = new SaveFileDialog();
             if (save.ShowDialog() == DialogResult.OK)
             {
-                //if (pictureBox1.Image == null)
-                //{
-                //    Bitmap myBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                //    Graphics g1 = Graphics.FromImage(myBitmap);
-                //    Paint(g1);
-                //    myBitmap.Save(save.FileName + ".jpg");
-                //}
-                //else
-                //{
-                //    Graphics g1 = Graphics.FromImage(bitmap);
-                //    Paint(g1);
-                //    bitmap.Save(save.FileName + ".jpg");
-                //}
-
-                //bitmap = ClonBitmap();
-                //pictureBox1.Image = bitmap;
-                //bitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                //ClonBitmap().Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                ClonBitmap();
+                bitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                
             }
         }
         private void Paint(Graphics g)
@@ -522,10 +520,17 @@ namespace MyPaintWinForm
         Thread MyThread;
         private void button2_Click_1(object sender, EventArgs e)
         {
+            
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = pictureBox1.Height - 1;
+            progressBar1.Value = 1;
+            progressBar1.Step = 1;
+
             ClonBitmap();
             list.Clear();
 
             pictureBox1.Enabled = false;
+            button2.Enabled = false;
 
             MyThread = new Thread(new ParameterizedThreadStart(this.Invert));
             MyThread.Name = "qwerty";
@@ -547,13 +552,12 @@ namespace MyPaintWinForm
                     Color newColor = Color.FromArgb(oldColor.A, 255 - oldColor.R, 255 - oldColor.G, 255 - oldColor.B);
                     bitmap1.SetPixel(x, y, newColor);
                 }
-                //this.Invoke(new Action(() => progressBar1.PerformStep()));
                 progMet.Invoke();
-                //Invoke((MethodInvoker)delegate { Refresh();});
                 
                 Refresh();
             }
             pictureBox1.Invoke(new Action(() => pictureBox1.Enabled = true));
+            button2.Invoke(new Action(() => button2.Enabled = true));
         }
 
         private void btn_backgroung_fon_Click(object sender, EventArgs e)   // смена цвета фона
