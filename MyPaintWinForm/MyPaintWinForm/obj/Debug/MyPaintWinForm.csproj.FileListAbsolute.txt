@@ -36,4 +36,3 @@ F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.GenerateResourc
 F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.csproj.CoreCompileInputs.cache
 F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.exe
 F:\MyPaintWinForm\MyPaintWinForm\obj\Debug\MyPaintWinForm.pdb
-C:\Users\Коля\Documents\home_work\MyPaintWinForm\MyPaintWinForm\bin\Debug\MyPaintWinForm.exe

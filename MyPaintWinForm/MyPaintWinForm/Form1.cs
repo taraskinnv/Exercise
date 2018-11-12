@@ -7,22 +7,20 @@ using System.Threading;
 namespace MyPaintWinForm
 {
     public delegate void Progbar();
-
-
+    
     public partial class Form1 : Form
     {
         Point MouseLoc = new Point(0, 0);
         Point Start;
         Point Finish;
         Point Start1;
-        Point Finish1= new Point(0, 0);
+        Point Finish1 = new Point(0, 0);
         Point _center;
         Point _endPoint;
         bool DrowP = false;
         bool flag = false;
         bool background = false;
         bool b = false;
-        bool startPaint = false;
         bool drawPoint = false;
         bool drawline = false;
         bool drawRectangle = false;
@@ -33,6 +31,7 @@ namespace MyPaintWinForm
         Pen pen;
         SolidBrush br;
         static Bitmap bitmap;
+        Bitmap saveBitmap;
 
         public Form1()
         {
@@ -42,12 +41,12 @@ namespace MyPaintWinForm
         {
             StartNew();
             pictureBox1.Paint += OnRemove;
-            bBack.Enabled = false;
+            cleanToolStripMenuItem.Click += button1_Click;
         }
 
         private void OnRemove(object sender, PaintEventArgs e)
         {
-            if (list.Count!=0)
+            if (list.Count != 0)
             {
                 bBack.Enabled = true;
             }
@@ -62,28 +61,20 @@ namespace MyPaintWinForm
             pictureBox1.BackColor = Color.White;
             btn_backgroung_fon.BackColor = Color.White;
             bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            saveBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             br = new SolidBrush(Color.White);
             btn_color.BackColor = Color.Black;
             btn_back_color.BackColor = pictureBox1.BackColor;
             textBox2.Text = "6";
             pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
             checkBox1.CheckState = CheckState.Checked;
+            bBack.Enabled = false;
 
-            
-
-            button2.Click += Button2_Click;
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            if (bBack.Enabled)
-            {
-                bBack.Enabled = false;
-            }
-            else
-            {
-                bBack.Enabled = true;
-            }
+            //drawPoint = true;
+            //button1.Enabled = false;
+            //button3.Enabled = true;
+            //button4.Enabled = true;
+            //button5.Enabled = true;
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -91,7 +82,6 @@ namespace MyPaintWinForm
             paint = true;
             if (e.Button == MouseButtons.Left && drawCircle)
             {
-                startPaint = true;
                 flag = false;
                 _center = new Point(e.X, e.Y);
                 pictureBox1.Paint += OnMovePictureBox_Paint;
@@ -99,13 +89,11 @@ namespace MyPaintWinForm
             if (e.Button == MouseButtons.Left && drawline)
             {
                 Start = new Point(e.X, e.Y);
-                startPaint = true;
                 flag = false;
                 pictureBox1.Paint += OnMovePictureBox_Paint;
             }
             if (e.Button == MouseButtons.Left && drawPoint)
             {
-                startPaint = true;
                 flag = false;
                 _center = new Point(e.X, e.Y);
                 DrowP = true;
@@ -114,17 +102,16 @@ namespace MyPaintWinForm
             {
                 Start = new Point(e.X, e.Y);
                 Start1 = new Point(e.X, e.Y);
-                startPaint = true;
                 flag = false;
                 //Запоминаем центр
                 _center = new Point(e.X, e.Y);
                 pictureBox1.Paint += OnMovePictureBox_Paint;
             }
         }
-         
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            startPaint = false;
+
             DrowP = false;
             flag = true;
             Finish = new Point(e.X, e.Y);
@@ -134,13 +121,13 @@ namespace MyPaintWinForm
             pictureBox1.Paint -= OnMovePictureBox_Paint;
             pictureBox1.Invalidate();
         }
-        
+
         private void OnMovePictureBox_Paint(object sender, PaintEventArgs e)
         {
             float radius;
             if (drawPoint)
             {
-                radius = float.Parse(textBox2.Text)/2;
+                radius = float.Parse(textBox2.Text) / 2;
             }
             else
             {
@@ -153,12 +140,12 @@ namespace MyPaintWinForm
             if (drawCircle)
             {
                 e.Graphics.TranslateTransform(_center.X, _center.Y);
-                e.Graphics.DrawEllipse(pen,  -radius, -radius, radius * 2, radius * 2);
+                e.Graphics.DrawEllipse(pen, -radius, -radius, radius * 2, radius * 2);
             }
             if (drawPoint)
             {
                 e.Graphics.TranslateTransform(_center.X, _center.Y);
-                e.Graphics.FillEllipse(new SolidBrush(btn_color.BackColor),_center.X -radius, _center.Y- radius, radius * 2, radius * 2);
+                e.Graphics.FillEllipse(new SolidBrush(btn_color.BackColor), _center.X - radius, _center.Y - radius, radius * 2, radius * 2);
             }
             if (drawRectangle)
             {
@@ -231,12 +218,11 @@ namespace MyPaintWinForm
                         b = false;
                     }
 
-                    if (Start.X>Finish.X)
+                    if (Start.X > Finish.X)
                     {
                         int a = Start.X;
                         Start.X = Finish.X;
                         Finish.X = a;
-
                     }
 
                     if (Start.Y > Finish.Y)
@@ -291,7 +277,7 @@ namespace MyPaintWinForm
             }
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i].myElenent== datalist.MyElenent.point)
+                if (list[i].myElenent == datalist.MyElenent.point)
                 {
                     e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                 }
@@ -341,24 +327,25 @@ namespace MyPaintWinForm
             drawRectangle = false;
             drawCircle = false;
             paint = false;
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ////g.Clear(Color.White);
-            //pictureBox1.Paint += PictureBox1_Paint;
-            //pictureBox1.Invalidate();
+            button1.Enabled = false;
+            button3.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
         }
-
+        
         private void button3_Click(object sender, EventArgs e)
         {
             drawline = true;
             drawPoint = false;
             drawRectangle = false;
             drawCircle = false;
-            //Button btn = sender as Button;
-            //btn.Enabled = false;
             paint = false;
+
+            button3.Enabled = false;
+            button1.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -368,6 +355,11 @@ namespace MyPaintWinForm
             drawRectangle = true;
             drawCircle = false;
             paint = false;
+
+            button4.Enabled = false;
+            button3.Enabled = true;
+            button1.Enabled = true;
+            button5.Enabled = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -377,6 +369,11 @@ namespace MyPaintWinForm
             drawRectangle = false;
             drawCircle = true;
             paint = false;
+
+            button5.Enabled = false;
+            button3.Enabled = true;
+            button4.Enabled = true;
+            button1.Enabled = true;
         }
 
         private void btn_color_Click(object sender, EventArgs e)
@@ -389,19 +386,20 @@ namespace MyPaintWinForm
             }
         }
 
-        private void comboBox1_TextUpdate(object sender, EventArgs e)
-        {
-            //ComboBox comboBoxSize = sender as ComboBox;
-            //double a = 1;
-            //if (!double.TryParse(comboBoxSize.Text,out a))
-            //{
-            //    comboBoxSize.Text = a.ToString();
-            //}
-        }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
+            try
+            {
+                pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                textBox2.Text = "6";
+            }
         }
 
         private void checkBox1_CheckStateChanged(object sender, EventArgs e)
@@ -425,7 +423,7 @@ namespace MyPaintWinForm
             }
         }
 
-        private void btn_back_color_Click(object sender, EventArgs e)
+        private void btn_back_color_Click(object sender, EventArgs e)   //цвет фона 
         {
             ColorDialog c = new ColorDialog();
             if (c.ShowDialog() == DialogResult.OK)
@@ -433,34 +431,38 @@ namespace MyPaintWinForm
                 btn_back_color.BackColor = c.Color;
             }
         }
-        
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)    //открыть изображение
         {
             OpenFileDialog open = new OpenFileDialog();
-            
+
             if (open.ShowDialog() == DialogResult.OK)
             {
                 bitmap = new Bitmap(open.FileName);
                 pictureBox1.Image = bitmap;
                 btn_backgroung_fon.Enabled = false;
             }
-            
+
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) // сохранить изображение
         {
             SaveFileDialog save = new SaveFileDialog();
             if (save.ShowDialog() == DialogResult.OK)
             {
-                ClonBitmap();
-                bitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-                
+                if (pictureBox1.Image != null)
+                {
+                    saveBitmap = (Bitmap)bitmap.Clone();
+                }
+                Graphics g1 = Graphics.FromImage(saveBitmap);
+                Paint(g1);
+                saveBitmap.Save(save.FileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             }
         }
         private void Paint(Graphics g)
         {
             //if (pictureBox1.Image != bitmap)
-            if(pictureBox1.Image == null)
+            if (pictureBox1.Image == null)
             {
                 g.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
             }
@@ -508,10 +510,10 @@ namespace MyPaintWinForm
                 }
             }
         }
-        
+
         private void ClonBitmap()
         {
-            
+
             Graphics g1 = Graphics.FromImage(bitmap);
             Paint(g1);
             pictureBox1.Image = bitmap;
@@ -520,7 +522,7 @@ namespace MyPaintWinForm
         Thread MyThread;
         private void button2_Click_1(object sender, EventArgs e)
         {
-            
+
             progressBar1.Minimum = 0;
             progressBar1.Maximum = pictureBox1.Height - 1;
             progressBar1.Value = 1;
@@ -553,11 +555,28 @@ namespace MyPaintWinForm
                     bitmap1.SetPixel(x, y, newColor);
                 }
                 progMet.Invoke();
-                
                 Refresh();
             }
-            pictureBox1.Invoke(new Action(() => pictureBox1.Enabled = true));
-            button2.Invoke(new Action(() => button2.Enabled = true));
+            //InvokeRequired
+            if(pictureBox1.InvokeRequired)
+            {
+                pictureBox1.Invoke(new Action(() => pictureBox1.Enabled = true));
+            }
+            else
+            {
+                pictureBox1.Enabled = true;
+            }
+
+
+            if (button2.InvokeRequired)
+            {
+                button2.Invoke(new Action(() => button2.Enabled = true));
+            }
+            else
+            {
+                button2.Enabled = true;
+            }
+            
         }
 
         private void btn_backgroung_fon_Click(object sender, EventArgs e)   // смена цвета фона
@@ -583,6 +602,5 @@ namespace MyPaintWinForm
             list.RemoveAt(list.Count - 1);
             pictureBox1.Invalidate();
         }
-        
     }
 }
