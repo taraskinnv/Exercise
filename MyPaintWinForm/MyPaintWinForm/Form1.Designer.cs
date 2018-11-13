@@ -287,7 +287,6 @@
             this.bBack.TabIndex = 12;
             this.bBack.Text = "back";
             this.bBack.UseVisualStyleBackColor = true;
-            this.bBack.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 
@@ -303,6 +302,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";

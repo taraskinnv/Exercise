@@ -15,13 +15,13 @@ namespace MyPaintWinForm
         Point Finish;
         Point Start1;
         Point Finish1 = new Point(0, 0);
-        Point _center;
+        Point _center;  //для круга
         Point _endPoint;
         bool DrowP = false;
         bool flag = false;
         bool background = false;
-        bool b = false;
-        bool drawPoint = false;
+        bool b = false; //  checkbox1 наличие контура
+        bool drawPoint = false; // для рисования точки 
         bool drawline = false;
         bool drawRectangle = false;
         bool drawCircle = false;
@@ -36,12 +36,14 @@ namespace MyPaintWinForm
         public Form1()
         {
             InitializeComponent();
+            this.Load += button1_Click;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             StartNew();
             pictureBox1.Paint += OnRemove;
             cleanToolStripMenuItem.Click += button1_Click;
+            
         }
 
         private void OnRemove(object sender, PaintEventArgs e)
@@ -69,12 +71,6 @@ namespace MyPaintWinForm
             pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
             checkBox1.CheckState = CheckState.Checked;
             bBack.Enabled = false;
-
-            //drawPoint = true;
-            //button1.Enabled = false;
-            //button3.Enabled = true;
-            //button4.Enabled = true;
-            //button5.Enabled = true;
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -595,12 +591,6 @@ namespace MyPaintWinForm
             list.Clear();
             pictureBox1.Image = null;
             StartNew();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            list.RemoveAt(list.Count - 1);
-            pictureBox1.Invalidate();
         }
     }
 }
