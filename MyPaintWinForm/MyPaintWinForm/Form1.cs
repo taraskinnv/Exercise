@@ -33,6 +33,8 @@ namespace MyPaintWinForm
         static Bitmap bitmap;
         Bitmap saveBitmap;
 
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +46,8 @@ namespace MyPaintWinForm
             pictureBox1.Paint += OnRemove;
             cleanToolStripMenuItem.Click += button1_Click;
             
+
+
         }
 
         private void OnRemove(object sender, PaintEventArgs e)
@@ -70,7 +74,6 @@ namespace MyPaintWinForm
             textBox2.Text = "6";
             pen = new Pen(btn_color.BackColor, float.Parse(textBox2.Text));
             checkBox1.CheckState = CheckState.Checked;
-            bBack.Enabled = false;
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -92,7 +95,11 @@ namespace MyPaintWinForm
             {
                 flag = false;
                 _center = new Point(e.X, e.Y);
+                Start = new Point(e.X, e.Y);
                 DrowP = true;
+                float radius = float.Parse(textBox2.Text);
+                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, true, true, new SolidBrush(btn_color.BackColor));
+                list.Add(dp);
             }
             if (e.Button == MouseButtons.Left && drawRectangle)
             {
@@ -107,7 +114,6 @@ namespace MyPaintWinForm
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-
             DrowP = false;
             flag = true;
             Finish = new Point(e.X, e.Y);
@@ -129,6 +135,7 @@ namespace MyPaintWinForm
             {
                 radius = (float)Math.Sqrt(Math.Pow(_endPoint.X - _center.X, 2) + Math.Pow(_endPoint.Y - _center.Y, 2));
             }
+
             if (drawline)
             {
                 e.Graphics.DrawLine(pen, Start, Finish1);
@@ -165,9 +172,10 @@ namespace MyPaintWinForm
         {
             if (DrowP)
             {
-                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X, _center.Y, e.X, e.Y);
-                list.Add(dp);
                 _center = e.Location;
+                float radius = float.Parse(textBox2.Text);
+                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, true, true, new SolidBrush(btn_color.BackColor));
+                list.Add(dp);
                 pictureBox1.Invalidate();
             }
             if (drawline && paint)
@@ -235,7 +243,6 @@ namespace MyPaintWinForm
             }
             if (drawCircle && paint)
             {
-
                 if (!flag)
                 {
                     if (e.Button == MouseButtons.Left)
@@ -275,7 +282,12 @@ namespace MyPaintWinForm
             {
                 if (list[i].myElenent == datalist.MyElenent.point)
                 {
-                    e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    //e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    e.Graphics.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
+                    //if (list.Count-1>i && list[i+1].myElenent == datalist.MyElenent.point)
+                    //{
+                    //    e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i+1].StartX, list[i+1].StartY);
+                    //}
                 }
                 else if (list[i].myElenent == datalist.MyElenent.line)
                 {
@@ -394,7 +406,11 @@ namespace MyPaintWinForm
             }
             finally
             {
-                textBox2.Text = "6";
+                float str;
+                if (!float.TryParse(textBox2.Text,out str))
+                {
+                    textBox2.Text = "6";
+                }
             }
         }
 
@@ -438,7 +454,6 @@ namespace MyPaintWinForm
                 pictureBox1.Image = bitmap;
                 btn_backgroung_fon.Enabled = false;
             }
-
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) // сохранить изображение
@@ -457,7 +472,6 @@ namespace MyPaintWinForm
         }
         private void Paint(Graphics g)
         {
-            //if (pictureBox1.Image != bitmap)
             if (pictureBox1.Image == null)
             {
                 g.FillRectangle(br, 0, 0, pictureBox1.Width, pictureBox1.Height);
@@ -509,7 +523,6 @@ namespace MyPaintWinForm
 
         private void ClonBitmap()
         {
-
             Graphics g1 = Graphics.FromImage(bitmap);
             Paint(g1);
             pictureBox1.Image = bitmap;
