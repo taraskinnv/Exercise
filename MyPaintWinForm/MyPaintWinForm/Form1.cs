@@ -27,14 +27,11 @@ namespace MyPaintWinForm
         bool drawCircle = false;
         bool paint = false;
         float radius;
-        List<datalist> list = new List<datalist>();
+        List<datalist> list = new List<datalist>(); //List для хранения фигур
         Pen pen;
         SolidBrush br;
-        static Bitmap bitmap;
-        Bitmap saveBitmap;
-
-        
-
+        static Bitmap bitmap; //Bitmap общий
+        Bitmap saveBitmap;  //Bitmap для сохранения
         public Form1()
         {
             InitializeComponent();
@@ -45,9 +42,6 @@ namespace MyPaintWinForm
             StartNew();
             pictureBox1.Paint += OnRemove;
             cleanToolStripMenuItem.Click += button1_Click;
-            
-
-
         }
 
         private void OnRemove(object sender, PaintEventArgs e)
@@ -98,8 +92,9 @@ namespace MyPaintWinForm
                 Start = new Point(e.X, e.Y);
                 DrowP = true;
                 float radius = float.Parse(textBox2.Text);
-                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, true, true, new SolidBrush(btn_color.BackColor));
+                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X, _center.Y, e.X+1, e.Y+1);
                 list.Add(dp);
+                pictureBox1.Invalidate();
             }
             if (e.Button == MouseButtons.Left && drawRectangle)
             {
@@ -172,11 +167,11 @@ namespace MyPaintWinForm
         {
             if (DrowP)
             {
-                _center = e.Location;
-                float radius = float.Parse(textBox2.Text);
-                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X - radius, _center.Y - radius, radius * 2, radius * 2, true, true, new SolidBrush(btn_color.BackColor));
+                datalist dp = new datalist(datalist.MyElenent.point, pen, _center.X, _center.Y, e.X, e.Y);
                 list.Add(dp);
+                _center = e.Location;
                 pictureBox1.Invalidate();
+
             }
             if (drawline && paint)
             {
@@ -282,12 +277,7 @@ namespace MyPaintWinForm
             {
                 if (list[i].myElenent == datalist.MyElenent.point)
                 {
-                    //e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
-                    e.Graphics.FillEllipse(list[i].solidBrush, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
-                    //if (list.Count-1>i && list[i+1].myElenent == datalist.MyElenent.point)
-                    //{
-                    //    e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i+1].StartX, list[i+1].StartY);
-                    //}
+                    e.Graphics.DrawLine(list[i].MyPen, list[i].StartX, list[i].StartY, list[i].EndX, list[i].EndY);
                 }
                 else if (list[i].myElenent == datalist.MyElenent.line)
                 {
@@ -529,9 +519,8 @@ namespace MyPaintWinForm
         }
 
         Thread MyThread;
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)    // инверсия в фоновом потоке
         {
-
             progressBar1.Minimum = 0;
             progressBar1.Maximum = pictureBox1.Height - 1;
             progressBar1.Value = 1;
@@ -585,7 +574,6 @@ namespace MyPaintWinForm
             {
                 button2.Enabled = true;
             }
-            
         }
 
         private void btn_backgroung_fon_Click(object sender, EventArgs e)   // смена цвета фона
@@ -604,6 +592,12 @@ namespace MyPaintWinForm
             list.Clear();
             pictureBox1.Image = null;
             StartNew();
+        }
+
+        private void bBack_Click(object sender, EventArgs e)    //  удаление последнего элемента в коллекции
+        {
+            list.RemoveAt(list.Count - 1);
+            pictureBox1.Invalidate();
         }
     }
 }

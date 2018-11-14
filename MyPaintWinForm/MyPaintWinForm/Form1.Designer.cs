@@ -287,6 +287,7 @@
             this.bBack.TabIndex = 12;
             this.bBack.Text = "back";
             this.bBack.UseVisualStyleBackColor = true;
+            this.bBack.Click += new System.EventHandler(this.bBack_Click);
             // 
             // Form1
             // 
