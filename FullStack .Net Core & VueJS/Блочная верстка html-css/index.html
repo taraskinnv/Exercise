@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div class="checkout">
+        <div class="header">
+            <p class="head"> Checkout form</p>
+        </div>
+        <div class="element1">
+            <input type="text" class="checkout-input checkout-width checkout-margin" placeholder="First name">
+            <input type="text" class="checkout-input checkout-width" placeholder="Last name">
+
+            <input type="email" class="checkout-input checkout-width checkout-margin" placeholder="E-mail">
+            <input type="tel" class="checkout-input checkout-width" placeholder="Phone">
+        </div>
+
+        <div class="element1">
+            <select name="" class="checkout-width-select checkout-margin">
+                <option>Country</option>
+            </select>
+            <input type="text" class="checkout-input2 checkout-width-city checkout-margin" placeholder="City">
+            <input type="text" class="checkout-input2 checkout-width-post checkout-margin" placeholder="Post code">
+
+
+            <input type="text" class="checkout-input2 checkout-width-max400" placeholder="Address">
+            <textarea name="" cols="31" rows="6" class="checkout-input2 checkout-width-max400 "
+                placeholder="Additional info"></textarea>
+
+
+        </div>
+
+        <div class="element3">
+            <p>
+                <input type="radio" id="visa" name="card" value="" class="radio1" checked>
+                <label for="visa" class="radio-widht-visa"><span>Visa</span></label>
+
+                <input type="radio" id="master-card" name="card" value="" class="radio1">
+                <label for="master-card" class="radio-widht">MasterCard</label>
+
+                <input type="radio" id="paypal" name="card" value="" class="radio1">
+                <label for="paypal" class="radio-widht">PayPal</label>
+            </p>
+
+
+            <input type="text" class="checkout-input2 checkout-width-max400" placeholder="Name on card">
+            <input type="text" class="checkout-input2 checkout-width-max350 checkout-margin" placeholder="Card numberd">
+            <input type="text" class="checkout-input2 checkout-width-cvv" placeholder="CVV">
+
+            <input type="text" class="checkout-input3 checkout-width-post checkout-margin" placeholder="Year">
+            <select name="" class="checkout-width-select2 checkout-margin">
+                <option>Month</option>
+            </select>
+            <label class="text" for="">Expiration date</label>
+        </div>
+        <div class="footer">
+            <input type="submit" class="submit checkout-margin" value="Continue">
+
+        </div>
+
+    </div>
+</body>
+
+</html>
