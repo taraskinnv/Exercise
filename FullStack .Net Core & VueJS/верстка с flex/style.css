@@ -1,0 +1,193 @@
+.container-flex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /*background-color: cadetblue;*/
+    background-color: #615a57;
+    justify-content: center;
+}
+
+.container-flex-1 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #efefef;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+.container-flex-header {
+    display: flex;
+    width: 100%;
+    border: red 1px solid;
+    flex-direction: column;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 18px;
+    color: #EFEFEF;
+}
+
+.menu-flex {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0px;
+    border: 1px green solid;
+    list-style: none;
+    align-items: center;
+}
+
+.menu-link {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+.log-in {
+    display: flex;
+    width: 15%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    padding: 5px 0 5px 0;
+}
+
+.header-row-twise {
+    display: flex;
+    padding: 5px 0 5px 0;
+    justify-content: space-between;
+}
+
+select {
+    border: 0;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.select-flex {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+img {
+    height: 35px;
+}
+
+.menu-flex li a {
+    color: #EFEFEF;
+}
+
+.log-in label {
+    color: #EFEFEF;
+}
+
+.header-row-1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 0;
+    align-items: center;
+}
+
+#img-lodo-2 {
+    height: 100px;
+}
+
+#search {
+    width: 70%;
+}
+
+.search-container {
+    border-radius: 50px;
+    height: 50px;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search {
+    border: none;
+    border-radius: 50px;
+    background-image: url(img/search.png);
+    background-repeat: no-repeat;
+    /*Убираем повтор изображения*/
+    background-position: bottom 5px right 10px;
+    background-size: 40px;
+    /*Позиционируем*/
+    margin-right: 5%;
+    height: 50px;
+}
+
+.img-container {
+    height: 50px;
+    justify-content: space-between;
+    width: 10%;
+}
+
+.btn-goods {
+    width: 15%;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    height: 50px;
+    color: #EFEFEF;
+    background-color: #f79e78;
+    padding: 0;
+}
+
+.select-flex label {
+    text-decoration: none;
+    color: #f79e78;
+}
+
+.select-flex a {
+    text-decoration: none;
+}
+
+.container-flex-2 {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #efefef;
+}
+
+.header-row-2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 0;
+    align-items: center;
+}
+
+.menu-flex-1 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0px;
+    border: 1px green solid;
+    list-style: none;
+    align-items: center;
+}
+
+.flex-container-li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-container-li img {
+    margin-right: 15px;
+}
