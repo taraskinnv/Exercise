@@ -8,7 +8,7 @@ html {
     display: grid;
 }
 
-.grid-header {
+.grid {
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
 }
@@ -67,10 +67,13 @@ html {
     width: 100%;
     height: 50px;
     justify-self: center;
+    align-self: center;
 }
 
 .grid-header-content img {
     height: 30px;
+    align-self: center;
+    justify-self: left;
 }
 
 #img-lodo-2 {
@@ -81,6 +84,13 @@ html {
     display: grid;
     grid-template-rows: 1fr 1fr;
     width: 80%;
+    align-self: center;
+    justify-self: center;
+}
+
+.phone>a {
+    text-decoration: none;
+    font-size: 18px;
 }
 
 .header-image {
@@ -88,15 +98,67 @@ html {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.header-image a img {
-    justify-items: center;
-}
-
-.menu-grid-catalog {
-    list-style: none;
+.header-image a {
+    align-self: center;
+    justify-self: center;
 }
 
 .menu-grid-catalog {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    list-style: none;
+    grid-template-columns: 50px repeat(6, 1fr);
+    padding: 0;
+}
+
+.menu-grid-catalog>li {
+    align-self: center;
+    justify-self: center;
+}
+
+.menu-grid-catalog>li:nth-child(1),
+.menu-grid-catalog>li:nth-child(2) {
+    justify-self: left;
+}
+
+.menu-grid-catalog>li:last-child {
+    justify-self: right;
+}
+
+.grid-content {
+    display: grid;
+}
+
+.container-grid-content {
+    display: grid;
+    grid-template-columns: 6fr 3fr;
+}
+
+.container-grid-content img {
+    width: 99%;
+}
+
+.content-right {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+}
+
+.content-right>img {
+    align-self: center;
+    justify-self: end;
+}
+
+.grid-container-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-element {
+    margin-top: 30px;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-element img {
+    height: 100px;
 }
