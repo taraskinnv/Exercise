@@ -21,10 +21,11 @@ div {
     color: yellow;
     background-color: seagreen;
     padding: 5px;
-    display: block;
+    /*display: block;*/
     border-radius: 5px;
     margin-bottom: 5px;
     list-style-type: none;
+    min-height: 40px;
 }
 
 .node {
@@ -42,4 +43,9 @@ div {
 .under {
     opacity: 0.7;
     background-color: brown;
+}
+
+.temp {
+    opacity: 0.5;
+    background-color: gray;
 }
