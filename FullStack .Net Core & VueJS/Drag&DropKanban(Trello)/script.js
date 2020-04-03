@@ -22,34 +22,25 @@ function columns(column) {
 }
 
 function dragover_column(event) {
-    //event.stopPropagation();
+
     event.preventDefault();
+    document.querySelectorAll(".node").forEach(nodes);
 
     if (this == drag_column) {
         return;
     } else {
         drag_column1 = this;
 
-        let res = drag_column1.querySelectorAll(".node").length;
-        if (!res && res < 1) {
-            //создает временный элемент на пустой доске
+        let div = drag_column1.querySelector(".temp");
+
+        if (!div) {
             this.insertAdjacentElement('afterbegin', createElement());
             document.querySelectorAll(".temp").forEach(nodes);
-            console.log("if1");
-            return;
-
-        } else {
-            let div = drag_column1.querySelector(".temp");
-
-            if (!div) {
-                //создает временный элемент не на пустой доске внизу списка
-                this.insertAdjacentElement('afterbegin', createElement());
-                document.querySelectorAll(".temp").forEach(nodes);
-                return;
-            }
-            console.log("else1");
+            console.log("else1afterbegin");
             return;
         }
+        console.log("else1");
+        return;
     }
 }
 
@@ -66,7 +57,26 @@ function drop_column(event) {
 
 function dragleave_column(event) {
     console.log("dragleave_column");
+    if (!drag_enter) {
+        if (!drag_column1) {
+            console.log("return dragleave_column");
+
+            return;
+        }
+        let div = drag_column1.querySelector(".temp");
+
+        if (div) {
+            console.log(this);
+            console.log("remove dragleave_column");
+
+            div.remove();
+
+        }
+        return;
+    }
     if (drag_column1 && !(drag_enter.parentElement == this)) {
+
+
         let div = drag_column1.querySelector(".temp");
 
         if (div) {
@@ -105,30 +115,33 @@ function dragend_node(event) {
 
 function dragenter_node(event) {
     event.stopPropagation();
+
     if (this == drag_node) {
+        console.log(this);
+
+        console.log("this == drag_node");
+
         return;
     }
 
     drag_enter = this;
-    console.log(drag_enter);
 
     console.log("dragenter_node");
+    console.log(this);
 
     this.classList.add("under");
 
 
     //создать временный элемент под элементом
-    this.insertAdjacentElement('afterend', createElement());
-
-    let div = drag_column1.querySelector(".temp");
-    if (div) {
-        console.log(this);
-
-        div.remove();
+    if (drag_column1) {
+        return
     }
-
-
-
+    let divNode = drag_column1.querySelector(".temp");
+    if (divNode == drag_enter) {
+        console.log("TestTTTTT");
+        return;
+    }
+    console.log("dragenter_node1");
 }
 
 function dragover_node(event) {
@@ -139,15 +152,23 @@ function dragover_node(event) {
 }
 
 function dragleave_node(event) {
+    console.log("dragleave_node");
+
     if (this == drag_node) {
+        console.log("this == drag_node");
+
         return;
     }
     this.classList.remove("under");
-    //drag_enter = null;
+    console.log("dragleave_node");
+
+    drag_enter = null;
+
 }
 
 function drop_node(event) {
     event.stopPropagation();
+    console.log("drop_node");
 
     if (this == drag_node) {
         return;
@@ -157,6 +178,10 @@ function drop_node(event) {
         let node = Array.from(this.parentElement.querySelectorAll(".node"));
         let i = node.indexOf(this);
         let y = node.indexOf(drag_node);
+        this.insertAdjacentElement('afterend', drag_node);
+        console.log(this);
+
+        console.log("afterend");
 
         if (i < y) {
             this.insertAdjacentElement('beforebegin', drag_node);
@@ -170,7 +195,6 @@ function drop_node(event) {
         let div = drag_column1.querySelector(".temp");
 
         if (div) {
-            console.log("this");
             div.remove();
         }
     }
