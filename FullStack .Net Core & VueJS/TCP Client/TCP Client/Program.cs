@@ -10,6 +10,7 @@ namespace TCP_Client
         {
             Console.Write("Введите адрес http веб-страницы: ");
             String mes = Console.ReadLine();
+            mes = GetDomein(mes);
             Console.WriteLine("tcp client started");
             var message = $"GET / HTTP/1.0\nHost: {mes}\n\n";
             try
@@ -50,5 +51,18 @@ namespace TCP_Client
                 throw;
             }
         }
+
+        public static String GetDomein(String mes)
+        {
+            mes = mes.Trim();
+            string[] array = mes.Split(new Char[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+            if (array[0] == "http:")
+            {
+                return array[1];
+            }
+            return array[0];
+        }
     }
+
+
 }
