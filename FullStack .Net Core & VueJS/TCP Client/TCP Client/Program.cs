@@ -8,12 +8,14 @@ namespace TCP_Client
     {
         static void Main(string[] args)
         {
+            Console.Write("Введите адрес http веб-страницы: ");
+            String mes = Console.ReadLine();
             Console.WriteLine("tcp client started");
-            var message = "GET / HTTP/1.0\nHost: selin.in.ua\n\n";
+            var message = $"GET / HTTP/1.0\nHost: {mes}\n\n";
             try
             {
                 var port = 80;
-                var serverAddress = "selin.in.ua";
+                var serverAddress = mes;
                 var client = new TcpClient(serverAddress, port);
                 var data = System.Text.Encoding.ASCII.GetBytes(message);
                 NetworkStream stream = client.GetStream();
@@ -38,11 +40,13 @@ namespace TCP_Client
                 stream.Close();
                 client.Close();
                 responseMessage = Cut.CutHeders(responseMessage);
-                Save.SaveFile(responseMessage);
+                SaveFile.Save(responseMessage);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+
                 throw;
             }
         }

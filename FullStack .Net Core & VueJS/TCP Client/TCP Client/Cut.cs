@@ -9,12 +9,17 @@ namespace TCP_Client
         public static String CutHeders(string message)
         {
             int startIndexOf = message.IndexOf("<html");
-            //message = message.Remove(0, startIndexOf);
-            int finishIndexOf = message.LastIndexOf("</html>");// + "</html>".Length;
-            //message = message.Remove(finishIndexOf);
-
-
+            int finishIndexOf = message.LastIndexOf("</html>");
             return message.Substring(startIndexOf, finishIndexOf - startIndexOf + "</html>".Length);
+        }
+
+        public static String CutHeders(StringBuilder message)
+        {
+            String str = message.ToString();
+
+            int startIndexOf = str.IndexOf("<html");
+            int finishIndexOf = str.LastIndexOf("</html>");
+            return str.Substring(startIndexOf, finishIndexOf - startIndexOf + "</html>".Length);
         }
     }
 }
