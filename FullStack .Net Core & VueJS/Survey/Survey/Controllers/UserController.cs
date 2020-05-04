@@ -22,7 +22,6 @@ namespace Survey.Controllers
         public IEnumerable<User> Get()
         {
             return _repository.GetUsers();
-            //return new string[] { "value1", "value2" };
         }
 
         // GET: api/User/5

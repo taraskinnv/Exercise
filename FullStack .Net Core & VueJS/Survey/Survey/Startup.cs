@@ -27,6 +27,15 @@ namespace Survey
         {
             services.AddTransient<IRepository, Repository>();
             //services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+
+            });
             services.AddControllers();
         }
 
@@ -41,6 +50,8 @@ namespace Survey
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
