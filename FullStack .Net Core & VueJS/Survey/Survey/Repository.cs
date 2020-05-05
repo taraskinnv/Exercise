@@ -28,5 +28,51 @@ namespace Survey
 
             return users;
         }
+        public string GetUser(int id)
+        {
+            //string user = String.Empty;
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+               var user = connection.Query<string>($"select Users.email from Users where {id}=Users.id").First();
+               return user;
+            }
+
+            
+        }
+
+        public IEnumerable<string> GetQuestions()
+        {
+            IEnumerable<string> questions = null;
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                questions = connection.Query<string>("select Question.question from Question").ToList();
+            }
+
+            return questions;
+        }
+
+
+        public Int32? SaveQuestion( Poll poll)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var sqlQuery ="INSERT INTO Question (question, id_Users) VALUES(@question, @id_Users)";
+                connection.Execute(sqlQuery,new { question = poll.Question, id_Users = 1 });
+                var sqlId = $"SELECT Question.id from Question where Question.question = {poll.Question}";
+                int? questionId = connection.Query<int>(sqlQuery).FirstOrDefault();
+                return questionId;
+            }
+        }
+
+        public Int32? SaveAnswer(Poll poll)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+
+                return null;
+            }
+        }
     }
 }

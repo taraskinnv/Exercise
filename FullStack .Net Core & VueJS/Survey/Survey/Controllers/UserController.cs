@@ -25,10 +25,10 @@ namespace Survey.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return _repository.GetUser(id);
         }
 
         // POST: api/User

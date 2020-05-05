@@ -16,12 +16,12 @@ namespace Survey.Controllers
         {
             _repository = repository;
         }
-        //// GET: api/Poll
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        // GET: api/Poll
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return _repository.GetQuestions();
+        }
 
         //// GET: api/Poll/5
         //[HttpGet("{id}", Name = "Get")]
