@@ -34,11 +34,11 @@ namespace Survey
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-               var user = connection.Query<string>($"select Users.email from Users where {id}=Users.id").First();
-               return user;
+                var user = connection.Query<string>($"select Users.email from Users where {id}=Users.id").First();
+                return user;
             }
 
-            
+
         }
 
         public IEnumerable<string> GetQuestions()
@@ -53,26 +53,75 @@ namespace Survey
             return questions;
         }
 
-
-        public Int32? SaveQuestion( Poll poll)
+        public IEnumerable<string> GetAnswersSEnumerable(string question)
         {
+            IEnumerable<string> answers = null;
+
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                var sqlQuery ="INSERT INTO Question (question, id_Users) VALUES(@question, @id_Users)";
-                connection.Execute(sqlQuery,new { question = poll.Question, id_Users = 1 });
-                var sqlId = $"SELECT Question.id from Question where Question.question = {poll.Question}";
-                int? questionId = connection.Query<int>(sqlQuery).FirstOrDefault();
-                return questionId;
+                answers = connection.Query<string>("select Answer_options.answer from Answer_options").ToList();
+            }
+
+            return answers;
+        }
+
+
+        public bool? SaveQuestionAndAnswers(Poll poll)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(connectionString))
+                {
+                    var sqlQuery = "INSERT INTO Question (question, id_Users) VALUES(@question, @id_Users)";
+                    connection.Execute(sqlQuery, new { question = poll.Question, id_Users = 1 });
+                    var sqlId = $"SELECT Question.id from Question where Question.question = {poll.Question}";
+                    int questionId = connection.Query<int>(sqlQuery).FirstOrDefault();
+
+                    foreach (var pollAnswer in poll.Answers)
+                    {
+                        var addAnswer = $"INSERT INTO Answer_options (answer, id_Question) VALUES(@question, @id_Question)";
+                        connection.Execute(addAnswer, new { answer = pollAnswer, id_Question = questionId });
+                    }
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+        }
+
+        public IEnumerable<Poll> GetQuestionAndAnswers()
+        {
+            List<Poll> polls = new List<Poll>();
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var sqlGetQuestions = GetQuestions();
+
+
+
+                foreach (var question in sqlGetQuestions)
+                {
+                    var sqlAnswers = Answers(GetAnswersSEnumerable(question));
+
+                    polls.Add(new Poll() {Question =  question, Answers = sqlAnswers as List<Answer>});
+                }
+
+                return polls;
             }
         }
 
-        public Int32? SaveAnswer(Poll poll)
+        public IEnumerable<Answer> Answers(IEnumerable<string> enumerable)
         {
-            using (IDbConnection connection = new SqlConnection(connectionString))
+            List<Answer> answers = new List<Answer>();
+            for (int i = 0; i < enumerable.Count(); i++)
             {
-
-                return null;
+                answers.Add(new Answer() { AnswerAnswer = ((List<string>)enumerable)[i] });
             }
+
+            return answers;
         }
     }
 }

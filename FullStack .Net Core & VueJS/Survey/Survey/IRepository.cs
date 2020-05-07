@@ -11,7 +11,8 @@ namespace Survey
         IEnumerable<User> GetUsers();
         string GetUser(int id);
         IEnumerable<string> GetQuestions();
-        Int32? SaveQuestion(Poll poll);
-        Int32? SaveAnswer(Poll poll);
+        bool? SaveQuestionAndAnswers(Poll poll);
+        IEnumerable<Poll> GetQuestionAndAnswers();
+
     }
 }

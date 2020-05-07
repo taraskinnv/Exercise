@@ -18,9 +18,9 @@ namespace Survey.Controllers
         }
         // GET: api/Poll
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Poll> Get()
         {
-            return _repository.GetQuestions();
+            return _repository.GetQuestionAndAnswers();
         }
 
         //// GET: api/Poll/5

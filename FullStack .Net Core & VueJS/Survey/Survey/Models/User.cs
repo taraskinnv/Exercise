@@ -9,6 +9,5 @@ namespace Survey.Models
     {
         public string email { get; set; }
         public string password_email { get; set; }
-
     }
 }
