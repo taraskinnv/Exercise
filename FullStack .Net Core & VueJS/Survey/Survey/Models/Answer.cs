@@ -8,6 +8,6 @@ namespace Survey
         [JsonProperty("id")] public long Id { get; set; } = new Random().Next();
 
         [JsonProperty("answer")]
-        public string AnswerAnswer { get; set; }
+        public string answer { get; set; }
     }
 }

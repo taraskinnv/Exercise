@@ -118,7 +118,7 @@ namespace Survey
             List<Answer> answers = new List<Answer>();
             for (int i = 0; i < enumerable.Count(); i++)
             {
-                answers.Add(new Answer() { AnswerAnswer = ((List<string>)enumerable)[i] });
+                answers.Add(new Answer() { answer = ((List<string>)enumerable)[i] });
             }
 
             return answers;

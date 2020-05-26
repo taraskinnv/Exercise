@@ -35,7 +35,8 @@ namespace Survey.Controllers
         [Produces("application/json")]
         public JsonResult Post([FromBody] Poll value)
         {
-            return  new JsonResult("OK");
+            return  new JsonResult(value);
+            //return  new JsonResult("OK");
         }
 
         //// PUT: api/Poll/5
